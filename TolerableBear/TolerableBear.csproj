@@ -60,10 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\controllers\testcontroller.js" />
+    <Content Include="app\controllers\circlecontroller.js" />
+    <Content Include="app\controllers\rectcontroller.js" />
     <Content Include="app\controllers\maincontroller.js" />
+    <Content Include="app\services\kineticservice.js" />
     <Content Include="app\services\timeservice.js" />
-    <Content Include="app\views\test.html" />
+    <Content Include="app\views\shapes.html" />
     <Content Include="app\views\main.html" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-mocks.js" />
@@ -71,6 +73,7 @@
     <Content Include="scripts\angular-route.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\kinetic-v5.0.1.min.js" />
     <Content Include="scripts\moment-with-langs.js" />
     <Content Include="scripts\moment-with-langs.min.js" />
     <Content Include="scripts\moment.js" />

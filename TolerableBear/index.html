@@ -5,16 +5,21 @@
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-route.min.js"></script>
     <script src="scripts/moment.min.js"></script>
+    <script src="scripts/kinetic-v5.0.1.min.js"></script>
 </head>
 <body ng-app="MyModule">
     <a href="#/main">Main</a>
-    <a href="#/test">Test</a>
+    <a href="#/circle">Circle</a>
+    <a href="#/rectangle">Rectangle</a>
     <div>
         <div ng-view></div>
     </div>
+
     <script src="app/app.js"></script>
     <script src="app/controllers/maincontroller.js"></script>
-    <script src="app/controllers/testcontroller.js"></script>
+    <script src="app/controllers/circlecontroller.js"></script>
+    <script src="app/controllers/rectcontroller.js"></script>
     <script src="app/services/timeservice.js"></script>
+    <script src="app/services/kineticservice.js"></script>
 </body>
 </html>
