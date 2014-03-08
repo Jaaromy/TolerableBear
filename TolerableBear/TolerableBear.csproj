@@ -14,7 +14,7 @@
     <RootNamespace>TolerableBear</RootNamespace>
     <AssemblyName>TolerableBear</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -63,8 +63,10 @@
     <Content Include="app\controllers\circlecontroller.js" />
     <Content Include="app\controllers\rectcontroller.js" />
     <Content Include="app\controllers\maincontroller.js" />
+    <Content Include="app\services\agentservice.js" />
     <Content Include="app\services\kineticservice.js" />
     <Content Include="app\services\timeservice.js" />
+    <Content Include="app\services\utilityservice.js" />
     <Content Include="app\views\shapes.html" />
     <Content Include="app\views\main.html" />
     <Content Include="index.html" />
@@ -113,7 +115,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>40562</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:40553/</IISUrl>
+          <IISUrl>http://localhost/TolerableBear</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
