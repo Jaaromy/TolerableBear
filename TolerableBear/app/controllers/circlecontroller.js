@@ -4,6 +4,8 @@
 
        init();
 
+       var stage =    KineticService.createStage('container', 640, 480);
+
        function init() {
           $scope.pageName = "CIRCLES";
           AgentService.createAgent('circle1');
