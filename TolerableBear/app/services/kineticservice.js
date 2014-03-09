@@ -2,34 +2,36 @@
    'use strict';
    var KineticServiceFactory = {};
 
-   KineticServiceFactory.circle = function (stage) {
-      var circle = new Kinetic.Circle({
-         x: stage.getWidth() / 2,
-         y: stage.getHeight() / 2,
-         radius: 70,
+   var stages = [];
+
+   KineticServiceFactory.circle = function (x, y, radius) {
+      var circle = new $window.Kinetic.Circle({
+         x: x,
+         y: y,
+         radius: radius,
          fill: 'red',
          stroke: 'black',
-         strokeWidth: 4
+         strokeWidth: 2
       });
 
       return circle;
    };
 
-   KineticServiceFactory.circle = function (stage) {
-      var circle = new Kinetic.Circle({
-         x: stage.getWidth() / 2,
-         y: stage.getHeight() / 2,
-         radius: 70,
-         fill: 'red',
-         stroke: 'black',
-         strokeWidth: 4
-      });
+   //KineticServiceFactory.circle = function (stage) {
+   //   var circle = new $window.Kinetic.Circle({
+   //      x: stage.getWidth() / 2,
+   //      y: stage.getHeight() / 2,
+   //      radius: 70,
+   //      fill: 'red',
+   //      stroke: 'black',
+   //      strokeWidth: 4
+   //   });
 
-      return circle;
-   };
+   //   return circle;
+   //};
 
    KineticServiceFactory.rect = function (stage) {
-      var rect = new Kinetic.Rect({
+      var rect = new $window.Kinetic.Rect({
          x: 239,
          y: 75,
          width: 100,
@@ -43,7 +45,7 @@
    };
 
    KineticServiceFactory.layer = function (shape) {
-      var layer = new Kinetic.Layer();
+      var layer = new $window.Kinetic.Layer();
 
       if (shape) {
          layer.add(shape);
