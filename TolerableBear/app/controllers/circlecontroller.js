@@ -1,5 +1,5 @@
 ﻿angular.module('MyModule')
-    .controller('circlecontroller', function ($scope, $timeout, KineticService, UtilityService, AgentService) {
+    .controller('circlecontroller', function ($scope, $timeout, $window, KineticService, UtilityService, AgentService) {
        'use strict';
 
        var stage = {};
@@ -8,6 +8,10 @@
           $scope.pageName = "CIRCLES";
           stage = KineticService.createStage('container', 640, 480);
           AgentService.createAgent(stage, 'circle1');
+          var v1 = new Vec2(4, 5);
+          var v2 = new Vec2(1, 0);
+          v1.normalize();
+          var dt = v1.dot(v2);
        }
 
        init();
