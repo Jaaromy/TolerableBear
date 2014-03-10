@@ -2,19 +2,10 @@
    'use strict';
    var AgentServiceFactory = {};
 
-   var stage = KineticService.createStage('container', 640, 480);
    var agents = [];
    var layers = [];
 
-   AgentServiceFactory.getCanvasWidth = function () {
-      return stage.getWidth();
-   };
-
-   AgentServiceFactory.getCanvasHeight = function () {
-      return stage.getHeight();
-   };
-
-   AgentServiceFactory.createAgent = function (name) {
+   AgentServiceFactory.createAgent = function (stage, name) {
       var agent = KineticService.circle(50,50, 15);
       agent.aname = name ? name : layers.length + 1;
       var layer = KineticService.layer(agent);
