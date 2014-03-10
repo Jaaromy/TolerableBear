@@ -48,7 +48,7 @@
    }
 
    AgentServiceFactory.createAgent = function (stage, name) {
-      var agent = KineticService.circle(50,50, 15);
+      var agent = KineticService.circle(0,0, 15);
       agent.aname = name ? name : layers.length + 1;
 
       addAgent(agent);

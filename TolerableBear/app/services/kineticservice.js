@@ -61,6 +61,14 @@
          height: height ? height : 300
       });
 
+      var tmpLayer = new $window.Kinetic.Layer();
+      stage.add(tmpLayer);
+      var canvas = document.getElementsByTagName('canvas')[0];
+      var ctx = canvas.getContext('2d');
+
+      ctx.translate(0, canvas.height);
+      ctx.scale(1, -1);
+
       return stage;
    };
 
