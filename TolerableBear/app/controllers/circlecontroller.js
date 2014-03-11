@@ -1,9 +1,8 @@
 ﻿angular.module('MyModule')
-    .controller('circlecontroller', function ($scope, $timeout, $window, KineticService, UtilityService, AgentService) {
+    .controller('circlecontroller', function ($scope, $timeout, KineticService, UtilityService, AgentService) {
        'use strict';
 
        var stage = {};
-       $scope.pixelRatio = {};
        function init() {
           $scope.pageName = "CIRCLES";
           stage = KineticService.createStage('container', 1024, 768);
@@ -13,7 +12,6 @@
              v1.normalize();
              AgentService.createAgent(stage, null, v1, UtilityService.randomInt(4, 20));
           }
-          $scope.pixelRatio = $window.Kinetic.pixelRatio;
        }
 
        init();

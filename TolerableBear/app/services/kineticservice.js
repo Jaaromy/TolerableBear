@@ -31,12 +31,8 @@
       return rect;
    };
 
-   KineticServiceFactory.layer = function (shape) {
+   KineticServiceFactory.layer = function () {
       var layer = new $window.Kinetic.Layer();
-
-      if (shape) {
-         layer.add(shape);
-      }
 
       return layer;
    };
@@ -48,9 +44,6 @@
          width: width ? width : 400,
          height: height ? height : 300
       });
-
-      var tmpLayer = new $window.Kinetic.Layer();
-      stage.add(tmpLayer);
 
       return stage;
    };

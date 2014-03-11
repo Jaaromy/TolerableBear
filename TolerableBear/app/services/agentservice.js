@@ -49,15 +49,23 @@
 
    AgentServiceFactory.createAgent = function (stage, name, direction, velocity) {
       var agent = KineticService.circle(UtilityService.randomInt(30, stage.getWidth() - 30), UtilityService.randomInt(30, stage.getHeight() - 30), 15);
-      agent.aname = name ? name : layers.length + 1;
+      agent.aname = name ? name : agents.length + 1;
       agent.direction = direction;
       agent.velocity = velocity;
 
       addAgent(agent);
-      var layer = KineticService.layer(agent);
-      addLayer(layer, agent);
-      stage.add(layer);
-      layers.push(layer);
+      if (layers.length == 0) {
+         layers.push(KineticService.layer());
+      }
+
+      layers[layers.length - 1].add(agent);
+
+      if (stage.children.length === 0) {
+         stage.add(layers[0]);
+      }
+
+      //addLayer(layer, agent);
+      //layers.push(layer);
    };
 
    AgentServiceFactory.getAgent = function (name) {
