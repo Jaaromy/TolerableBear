@@ -122,6 +122,11 @@
       }
    };
 
+   AgentServiceFactory.clear = function () {
+      agents = [];
+      layers = [];
+   };
+
    AgentServiceFactory.drawAllLayers = function () {
       for (var i = 0; i < layers.length; i++) {
          layers[i].draw();
