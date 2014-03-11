@@ -3,16 +3,17 @@
        'use strict';
 
        var stage = {};
-
+       $scope.pixelRatio = {};
        function init() {
           $scope.pageName = "CIRCLES";
           stage = KineticService.createStage('container', 1024, 768);
 
-          for (var i = 0; i < 20; i++) {
+          for (var i = 0; i < 5; i++) {
              var v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt( -10, 10));
              v1.normalize();
              AgentService.createAgent(stage, null, v1, UtilityService.randomInt(4, 20));
           }
+          $scope.pixelRatio = $window.Kinetic.pixelRatio;
        }
 
        init();
