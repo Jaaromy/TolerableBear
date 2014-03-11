@@ -42,7 +42,7 @@
    };
 
    KineticServiceFactory.createStage = function (container, width, height) {
-      //$window.Kinetic.pixelRatio = 1;
+      $window.Kinetic.pixelRatio = 1;
       var stage = new $window.Kinetic.Stage({
          container: container,
          width: width ? width : 400,
