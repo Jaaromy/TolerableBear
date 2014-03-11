@@ -80,6 +80,7 @@
     <Content Include="scripts\moment-with-langs.min.js" />
     <Content Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
+    <Content Include="scripts\stringformat.js" />
     <Content Include="scripts\TS_vector2.js" />
     <Content Include="Web.config" />
   </ItemGroup>

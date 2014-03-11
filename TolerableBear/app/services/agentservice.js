@@ -1,4 +1,4 @@
-﻿angular.module('MyModule').factory('AgentService', function ($window, KineticService) {
+﻿angular.module('MyModule').factory('AgentService', function ($window, KineticService, UtilityService) {
    'use strict';
    var AgentServiceFactory = {};
 
@@ -47,9 +47,11 @@
       }
    }
 
-   AgentServiceFactory.createAgent = function (stage, name) {
-      var agent = KineticService.circle(0,0, 15);
+   AgentServiceFactory.createAgent = function (stage, name, direction, velocity) {
+      var agent = KineticService.circle(UtilityService.randomInt(30, stage.getWidth() - 30), UtilityService.randomInt(30, stage.getHeight() - 30), 15);
       agent.aname = name ? name : layers.length + 1;
+      agent.direction = direction;
+      agent.velocity = velocity;
 
       addAgent(agent);
       var layer = KineticService.layer(agent);
@@ -70,11 +72,45 @@
       return null;
    };
 
-   AgentServiceFactory.moveAgent = function (dX, dY, name) {
+   AgentServiceFactory.setDirection = function (name, direction, velocity) {
       var agent = AgentServiceFactory.getAgent(name);
       if (agent) {
-         agent.setX(agent.getX() + dX);
-         agent.setY(agent.getY() + dY);
+         agent.direction = direction;
+         agent.velocity = velocity;
+      }
+   };
+   
+   AgentServiceFactory.moveAllAgents = function () {
+      for (var i = 0; i < agents.length; i++) {
+         AgentServiceFactory.moveAgent(agents[i].aname);
+      }
+   };
+
+   AgentServiceFactory.checkAllBoundaries = function (xBound, yBound) {
+      for (var i = 0; i < agents.length; i++) {
+         AgentServiceFactory.checkBoundary(agents[i].aname, xBound, yBound);
+      }
+   };
+
+   AgentServiceFactory.checkBoundary = function (name, xBound, yBound) {
+      var agent = AgentServiceFactory.getAgent(name);
+      if (agent) {
+         if (agent.getX() + agent.radius() > xBound || agent.getX() - agent.radius() < 0) {
+            agent.direction.x *= -1;
+         }
+
+         if (agent.getY() + agent.radius() > yBound || agent.getY() - agent.radius() < 0) {
+            agent.direction.y *= -1;
+         }
+      }
+   };
+
+   AgentServiceFactory.moveAgent = function (name) {
+      var agent = AgentServiceFactory.getAgent(name);
+      if (agent) {
+         var deltaVec = agent.direction.mulS(agent.velocity);
+         agent.setX(agent.getX() + deltaVec.x);
+         agent.setY(agent.getY() + deltaVec.y);
       }
    };
 

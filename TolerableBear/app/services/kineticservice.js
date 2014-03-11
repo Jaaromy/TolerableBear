@@ -1,4 +1,4 @@
-﻿angular.module('MyModule').factory('KineticService', function ($window) {
+﻿angular.module('MyModule').factory('KineticService', function ($window, UtilityService) {
    'use strict';
    var KineticServiceFactory = {};
 
@@ -9,26 +9,13 @@
          x: x,
          y: y,
          radius: radius,
-         fill: 'red',
+         fill: 'rgb({0},{1},{2})'.format(UtilityService.randomInt(0, 255), UtilityService.randomInt(0, 255), UtilityService.randomInt(0, 255)),
          stroke: 'black',
          strokeWidth: 2
       });
 
       return circle;
    };
-
-   //KineticServiceFactory.circle = function (stage) {
-   //   var circle = new $window.Kinetic.Circle({
-   //      x: stage.getWidth() / 2,
-   //      y: stage.getHeight() / 2,
-   //      radius: 70,
-   //      fill: 'red',
-   //      stroke: 'black',
-   //      strokeWidth: 4
-   //   });
-
-   //   return circle;
-   //};
 
    KineticServiceFactory.rect = function (stage) {
       var rect = new $window.Kinetic.Rect({
@@ -63,11 +50,6 @@
 
       var tmpLayer = new $window.Kinetic.Layer();
       stage.add(tmpLayer);
-      var canvas = document.getElementsByTagName('canvas')[0];
-      var ctx = canvas.getContext('2d');
-
-      ctx.translate(0, canvas.height);
-      ctx.scale(1, -1);
 
       return stage;
    };
