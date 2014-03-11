@@ -5,14 +5,23 @@
           return $window.innerWidth;
        }
 
+       //$scope.windowHeight = function () {
+       //   return $window.innerHeight;
+       //}
+
        $scope.$watch($scope.windowWidth, function (newValue, oldValue) {
           stage.setWidth(newValue);
        });
 
+       //$scope.$watch($scope.windowHeight, function (newValue, oldValue) {
+       //   stage.setHeight(newValue < 300 ? 300 : newValue);
+       //});
+
+
        var stage = {};
        function init() {
           $scope.pageName = "CIRCLES";
-          stage = KineticService.createStage('container', $scope.windowWidth(), 768);
+          stage = KineticService.createStage('container', $scope.windowWidth(), 700);
           AgentService.clear();
 
           for (var i = 0; i < 80; i++) {
