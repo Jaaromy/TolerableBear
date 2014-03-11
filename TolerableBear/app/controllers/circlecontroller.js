@@ -6,12 +6,12 @@
        function init() {
           $scope.pageName = "CIRCLES";
           stage = KineticService.createStage('container', 1024, 768);
-          KineticService.clear();
+          AgentService.clear();
 
-          for (var i = 0; i < 100; i++) {
+          for (var i = 0; i < 80; i++) {
              var v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt( -10, 10));
              v1.normalize();
-             AgentService.createAgent(stage, null, v1, UtilityService.randomInt(10, 40));
+             AgentService.createAgent(stage, null, v1, UtilityService.randomInt(5, 30));
           }
        }
 
