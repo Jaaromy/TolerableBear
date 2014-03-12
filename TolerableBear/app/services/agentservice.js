@@ -48,13 +48,66 @@
    }
 
    AgentServiceFactory.createAgent = function (stage, name, direction, velocity) {
-      var agent = KineticService.circle(UtilityService.randomInt(30, stage.getWidth() - 30), UtilityService.randomInt(30, stage.getHeight() - 30), 15);
+      var agent = KineticService.circle(UtilityService.randomInt(40, stage.getWidth() - 40), UtilityService.randomInt(40, stage.getHeight() - 40), 15);
       agent.aname = name ? name : agents.length + 1;
       agent.direction = direction;
       agent.velocity = velocity;
+      agent.position = new Vec2(agent.getX(), agent.getY());
+      agent.setPos = function (x, y) {
+         this.position.x = x;
+         this.position.y = y;
+         this.setX(x);
+         this.setY(y);
+      };
+      agent.mass = 10;
+
+      agent.checkCollision = function (agent) {
+         var dist = this.position.dist(agent.position);
+         if (dist < this.radius() + agent.radius()) {
+            var normalPlane = this.position.subV(agent.position);
+            normalPlane.normalize();
+            var collisionPlane = new Vec2(-normalPlane.x, normalPlane.y);
+
+            //var n_vel1 = Vector2.Dot(normalPlane, object1.Velocity);
+            //var c_vel1 = Vector2.Dot(collisionPlane, object1.Velocity);
+            //var n_vel2 = Vector2.Dot(normalPlane, object2.Velocity);
+            //var c_vel2 = Vector2.Dot(collisionPlane, object2.Velocity);
+            var n_vel1 = normalPlane.dot(this.direction);
+            var c_vel1 = collisionPlane.dot(this.direction);
+            var n_vel2 = normalPlane.dot(agent.direction);
+            var c_vel2 = collisionPlane.dot(agent.direction);
+
+            //var n_vel1_after = ((n_vel1 * (object1.Mass - object2.Mass)) + (2 * object2.Mass * n_vel2)) / (object2.Mass + object1.Mass);
+            //var n_vel2_after = ((n_vel2 * (object2.Mass - object1.Mass)) + (2 * object1.Mass * n_vel1)) / (object2.Mass + object1.Mass);
+            var n_vel1_after = ((n_vel1 * (this.mass - agent.mass)) + (2 * agent.mass * n_vel2)) / (agent.mass + this.mass);
+            var n_vel2_after = ((n_vel2 * (agent.mass - this.mass)) + (2 * this.mass * n_vel1)) / (agent.mass + this.mass);
+
+            //Vector2 vec_n_vel2_after = n_vel2_after * normalPlane;
+            //Vector2 vec_c_vel2 = c_vel2 * collisionPlane;
+            //Vector2 vec_n_vel1_after = n_vel1_after * normalPlane;
+            //Vector2 vec_c_vel1 = c_vel1 * collisionPlane;
+            var vec_n_vel2_after = normalPlane.mulS(n_vel2_after);
+            var vec_c_vel2 = collisionPlane.mulS(c_vel2);
+            var vec_n_vel1_after = normalPlane.mulS(n_vel1_after);
+            var vec_c_vel1 = collisionPlane.mulS(c_vel1);
+
+            //Vector2 vel1_after = vec_n_vel1_after + vec_c_vel1;
+            //Vector2 vel2_after = vec_n_vel2_after + vec_c_vel2;
+            var vel1_after = vec_n_vel1_after.addV(vec_c_vel1);
+            var vel2_after = vec_n_vel2_after.addV(vec_c_vel2);
+
+            this.direction = vel1_after;
+            var vel = this.velocity;
+         }
+      };
+
+      agent.setDirection = function (direction, velocity) {
+         this.direction = direction;
+         this.velocity = velocity;
+      };
 
       addAgent(agent);
-      if (layers.length == 0) {
+      if (layers.length === 0) {
          layers.push(KineticService.layer());
       }
 
@@ -83,11 +136,10 @@
    AgentServiceFactory.setDirection = function (name, direction, velocity) {
       var agent = AgentServiceFactory.getAgent(name);
       if (agent) {
-         agent.direction = direction;
-         agent.velocity = velocity;
+         agent.setDirection(direction, velocity);
       }
    };
-   
+
    AgentServiceFactory.moveAllAgents = function () {
       for (var i = 0; i < agents.length; i++) {
          AgentServiceFactory.moveAgent(agents[i].aname);
@@ -97,6 +149,16 @@
    AgentServiceFactory.checkAllBoundaries = function (xBound, yBound) {
       for (var i = 0; i < agents.length; i++) {
          AgentServiceFactory.checkBoundary(agents[i].aname, xBound, yBound);
+      }
+   };
+
+   AgentServiceFactory.checkAllCollisions = function () {
+      for (var i = 0; i < agents.length; i++) {
+         for (var j = 0; j < agents.length; j++) {
+            if (i != j) {
+               agents[i].checkCollision(agents[j]);
+            }
+         }
       }
    };
 
@@ -117,8 +179,7 @@
       var agent = AgentServiceFactory.getAgent(name);
       if (agent) {
          var deltaVec = agent.direction.mulS(agent.velocity);
-         agent.setX(agent.getX() + deltaVec.x);
-         agent.setY(agent.getY() + deltaVec.y);
+         agent.setPos(agent.position.x + deltaVec.x, agent.position.y + deltaVec.y);
       }
    };
 
