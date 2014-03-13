@@ -307,11 +307,19 @@
     AgentServiceFactory.checkBoundary = function (name, xBound, yBound) {
         var agent = AgentServiceFactory.getAgent(name);
         if (agent) {
-            if (agent.getX() + agent.radius() > xBound || agent.getX() - agent.radius() < 0) {
+            if (agent.getX() - agent.radius() < 0) {
+                agent.setPos(agent.radius() + 1, agent.position.y);
+                agent.velocity.x *= -1;
+            } else if (agent.getX() + agent.radius() > xBound) {
+                agent.setPos(xBound - agent.radius() - 1, agent.position.y);
                 agent.velocity.x *= -1;
             }
 
-            if (agent.getY() + agent.radius() > yBound || agent.getY() - agent.radius() < 0) {
+            if (agent.getY() - agent.radius() < 0) {
+                agent.setPos(agent.position.x, agent.radius() + 1);
+                agent.velocity.y *= -1;
+            } else if (agent.getY() + agent.radius() > yBound) {
+                agent.setPos(agent.position.x, yBound - agent.radius() - 1);
                 agent.velocity.y *= -1;
             }
         }
