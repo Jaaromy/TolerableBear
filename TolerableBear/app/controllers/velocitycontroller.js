@@ -9,9 +9,9 @@
         //   return $window.innerHeight;
         //}
 
-        $scope.$watch($scope.windowWidth, function (newValue, oldValue) {
-            stage.setWidth(newValue);
-        });
+        //$scope.$watch($scope.windowWidth, function (newValue, oldValue) {
+        //    stage.setWidth(newValue);
+        //});
 
         //$scope.$watch($scope.windowHeight, function (newValue, oldValue) {
         //   stage.setHeight(newValue < 300 ? 300 : newValue);
@@ -22,19 +22,36 @@
             $scope.pageName = "VELOCITY";
             AgentService.updateFrequency = 20;
             AgentService.pixelsPerMeter = 100;
-            stage = KineticService.createStage('container', $scope.windowWidth(), 700);
+            stage = KineticService.createStage('container', 1000, 500);
             AgentService.clear();
-            var radius = 30;
+            var radius = 25;
+            var diam = radius * 2;
+            var v1 = {};
 
-            var v1 = new Vec2(1, 0);
+            v1 = new Vec2(1, 0);
+            v1 = vMath.normalize(v1);
+            v1 = vMath.mulS(v1, 1);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam), v1, radius);
+
+            v1 = new Vec2(1, 0);
             v1 = vMath.normalize(v1);
             v1 = vMath.mulS(v1, 5);
-            AgentService.createAgent(stage, null, new Vec2(radius, stage.getHeight() / 2), v1, radius);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam * 2), v1, radius);
 
-            var v2 = new Vec2(-1, 0);
-            v2 = vMath.normalize(v2);
-            v2 = vMath.mulS(v2, 10);
-            AgentService.createAgent(stage, null, new Vec2(stage.getWidth() - radius, stage.getHeight() / 2), v2, radius);
+            v1 = new Vec2(1, 0);
+            v1 = vMath.normalize(v1);
+            v1 = vMath.mulS(v1, 10);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam * 3), v1, radius);
+
+            v1 = new Vec2(1, 0);
+            v1 = vMath.normalize(v1);
+            v1 = vMath.mulS(v1, 20);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam * 4), v1, radius);
+
+            v1 = new Vec2(1, 0);
+            v1 = vMath.normalize(v1);
+            v1 = vMath.mulS(v1, 50);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam * 5), v1, radius);
         }
 
         init();
