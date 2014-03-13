@@ -23,28 +23,34 @@
           stage = KineticService.createStage('container', $scope.windowWidth(), 700);
           AgentService.clear();
 
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 8; i++) {
              var v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt( -10, 10));
              v1 = vMath.normalize(v1);
-             v1 = vMath.mulS(v1,UtilityService.randomInt(1, 5));
+             v1 = vMath.mulS(v1,UtilityService.randomInt(1, 8));
              AgentService.createAgent(stage, null, v1, 15);
           }
 
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 8; i++) {
               var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
               v1 = vMath.normalize(v1);
-              v1 = vMath.mulS(v1, UtilityService.randomInt(1, 5));
+              v1 = vMath.mulS(v1, UtilityService.randomInt(1, 8));
               AgentService.createAgent(stage, null, v1, 20);
           }
 
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 8; i++) {
               var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
               v1 = vMath.normalize(v1);
               v1 = vMath.mulS(v1, UtilityService.randomInt(1, 8));
               AgentService.createAgent(stage, null, v1, 25);
           }
 
-       }
+          for (var i = 0; i < 3; i++) {
+              var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
+              v1 = vMath.normalize(v1);
+              v1 = vMath.mulS(v1, UtilityService.randomInt(1, 2));
+              AgentService.createAgent(stage, null, v1, 70);
+          }
+      }
 
        init();
 
