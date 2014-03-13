@@ -47,10 +47,15 @@
         }
     }
 
+    AgentServiceFactory.updateFrequency = 20;
+    AgentServiceFactory.pixelsPerMeter = 100;
+
     //Velocity is in m/s.
     //1 pixel == 1 centimeter
     //Must translate meter/second to centimeter/second and then apply frame factor for move.
-    var updateFac = 20 / 1000 * 100;
+    function updateFac() {
+        return AgentServiceFactory.updateFrequency / 1000 * AgentServiceFactory.pixelsPerMeter;
+    }
 
     AgentServiceFactory.createAgent = function (stage, name, startPos, velocity, radius) {
         var agent = KineticService.circle(startPos.x, startPos.y, radius);
@@ -126,8 +131,8 @@
                 // Reapply the move-back from before the collision (using the post collision velocity)
                 //Vector2 object1AdjustedPositionAfterCollision = object1.Position + vel1_after * millisecondsAfterCollision;
                 //Vector2 object2AdjustedPositionAfterCollision = object2.Position + vel2_after * millisecondsAfterCollision;
-                var object1AdjustedPositionAfterCollision = vMath.addV(this.position, vMath.mulS(vel1_after, millisecondsAfterCollision * updateFac));
-                var object2AdjustedPositionAfterCollision = vMath.addV(agent.position, vMath.mulS(vel2_after, millisecondsAfterCollision * updateFac));
+                var object1AdjustedPositionAfterCollision = vMath.addV(this.position, vMath.mulS(vel1_after, millisecondsAfterCollision * updateFac()));
+                var object2AdjustedPositionAfterCollision = vMath.addV(agent.position, vMath.mulS(vel2_after, millisecondsAfterCollision * updateFac()));
 
                 // Set the objects new positions and velocities.
                 //object1.SetState(object1AdjustedPositionAfterCollision, vel1_after);
@@ -334,7 +339,7 @@
         var agent = AgentServiceFactory.getAgent(name);
         if (agent) {
             //updateFac is frame update and conversion from meter/sec to centimeter/sec included.
-            var modifiedVel = vMath.mulS(agent.velocity, updateFac);
+            var modifiedVel = vMath.mulS(agent.velocity, updateFac());
             var newPos = vMath.addV(agent.position, modifiedVel);
             agent.setPos(newPos.x, newPos.y);
         }

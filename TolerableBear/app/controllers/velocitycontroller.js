@@ -20,6 +20,8 @@
         var stage = {};
         function init() {
             $scope.pageName = "VELOCITY";
+            AgentService.updateFrequency = 20;
+            AgentService.pixelsPerMeter = 100;
             stage = KineticService.createStage('container', $scope.windowWidth(), 700);
             AgentService.clear();
             var radius = 30;
@@ -38,7 +40,7 @@
         init();
 
         $scope.onTimeout = function () {
-            mytimeout = $timeout($scope.onTimeout, 20);
+            mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
 
             AgentService.checkAllBoundaries(stage.getWidth(), stage.getHeight());
 
@@ -49,7 +51,7 @@
             AgentService.drawAllLayers();
         };
 
-        var mytimeout = $timeout($scope.onTimeout, 20);
+        var mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
 
         $scope.$on("$destroy", function () {
 
