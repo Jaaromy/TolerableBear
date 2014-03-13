@@ -9,7 +9,7 @@
          x: x,
          y: y,
          radius: radius,
-         fill: 'rgb({0},{1},{2})'.format(UtilityService.randomInt(0, 255), UtilityService.randomInt(0, 255), UtilityService.randomInt(0, 255)),
+         fill: 'rgb({0},{1},{2})'.format(UtilityService.randomInt(0, 255), UtilityService.randomInt(0, 120), UtilityService.randomInt(120, 255)),
          stroke: 'black',
          strokeWidth: 2
       });

@@ -47,8 +47,8 @@
         }
     }
 
-    AgentServiceFactory.createAgent = function (stage, name, velocity) {
-        var agent = KineticService.circle(UtilityService.randomInt(40, stage.getWidth() - 40), UtilityService.randomInt(40, stage.getHeight() - 40), 15);
+    AgentServiceFactory.createAgent = function (stage, name, velocity, radius) {
+        var agent = KineticService.circle(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2), radius);
         agent.aname = name ? name : agents.length + 1;
         agent.velocity = velocity;
         agent.position = new Vec2(agent.getX(), agent.getY());
@@ -58,7 +58,7 @@
             this.setX(x);
             this.setY(y);
         };
-        agent.mass = 10;
+        agent.mass = radius * radius;
 
         agent.checkCollision = function (agent) {
             // Calculate the difference between the two objects.
