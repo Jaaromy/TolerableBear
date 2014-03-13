@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\velocitycontroller.js" />
     <Content Include="app\controllers\circlecontroller.js" />
     <Content Include="app\controllers\rectcontroller.js" />
     <Content Include="app\controllers\maincontroller.js" />

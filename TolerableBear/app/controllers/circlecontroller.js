@@ -24,31 +24,39 @@
           AgentService.clear();
 
           for (var i = 0; i < 8; i++) {
-             var v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt( -10, 10));
+             var radius = 15;
+             var startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
+             var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
              v1 = vMath.normalize(v1);
              v1 = vMath.mulS(v1,UtilityService.randomInt(1, 8));
-             AgentService.createAgent(stage, null, v1, 15);
+             AgentService.createAgent(stage, null, startPos, v1, radius);
           }
 
           for (var i = 0; i < 8; i++) {
+              var radius = 20;
+              var startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
               var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
               v1 = vMath.normalize(v1);
               v1 = vMath.mulS(v1, UtilityService.randomInt(1, 8));
-              AgentService.createAgent(stage, null, v1, 20);
+              AgentService.createAgent(stage, null, startPos, v1, radius);
           }
 
           for (var i = 0; i < 8; i++) {
+              var radius = 25;
+              var startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
               var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
               v1 = vMath.normalize(v1);
               v1 = vMath.mulS(v1, UtilityService.randomInt(1, 8));
-              AgentService.createAgent(stage, null, v1, 25);
+              AgentService.createAgent(stage, null, startPos, v1, radius);
           }
 
           for (var i = 0; i < 3; i++) {
+              var radius = 70;
+              var startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
               var v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
               v1 = vMath.normalize(v1);
               v1 = vMath.mulS(v1, UtilityService.randomInt(1, 2));
-              AgentService.createAgent(stage, null, v1, 70);
+              AgentService.createAgent(stage, null, startPos, v1, 70);
           }
       }
 

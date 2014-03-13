@@ -47,8 +47,10 @@
         }
     }
 
-    AgentServiceFactory.createAgent = function (stage, name, velocity, radius) {
-        var agent = KineticService.circle(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2), radius);
+    var updateFac = 20 / 1000;
+
+    AgentServiceFactory.createAgent = function (stage, name, startPos, velocity, radius) {
+        var agent = KineticService.circle(startPos.x, startPos.y, radius);
         agent.aname = name ? name : agents.length + 1;
         agent.velocity = velocity;
         agent.position = new Vec2(agent.getX(), agent.getY());
@@ -328,7 +330,8 @@
     AgentServiceFactory.moveAgent = function (name) {
         var agent = AgentServiceFactory.getAgent(name);
         if (agent) {
-            var newPos = vMath.addV(agent.position, agent.velocity);
+            var modifiedVel = vMath.mulS(agent.velocity, updateFac);
+            var newPos = vMath.addV(agent.position, modifiedVel);
             agent.setPos(newPos.x, newPos.y);
         }
     };

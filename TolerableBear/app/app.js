@@ -11,6 +11,11 @@ angular.module('MyModule').config(function ($routeProvider) {
       templateUrl: "app/views/shapes.html"
    });
 
+   $routeProvider.when("/velocity", {
+       controller: "velocitycontroller",
+       templateUrl: "app/views/shapes.html"
+   });
+
    $routeProvider.when("/rectangle", {
       controller: "rectcontroller",
       templateUrl: "app/views/shapes.html"
