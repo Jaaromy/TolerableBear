@@ -23,10 +23,10 @@
           stage = KineticService.createStage('container', $scope.windowWidth(), 700);
           AgentService.clear();
 
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 50; i++) {
              var v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt( -10, 10));
-             v1.normalize();
-             v1 = v1.mulS(UtilityService.randomInt(5, 15));
+             v1 = vMath.normalize(v1);
+             v1 = vMath.mulS(v1,UtilityService.randomInt(1, 10));
              AgentService.createAgent(stage, null, v1);
           }
        }
@@ -38,7 +38,7 @@
 
           AgentService.checkAllBoundaries(stage.getWidth(), stage.getHeight());
 
-          //AgentService.checkAllCollisions();
+          AgentService.checkAllCollisions();
 
           AgentService.moveAllAgents();
 
