@@ -69,6 +69,7 @@
     <Content Include="app\services\utilityservice.js" />
     <Content Include="app\views\shapes.html" />
     <Content Include="app\views\main.html" />
+    <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-route.js" />
