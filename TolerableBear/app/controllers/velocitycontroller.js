@@ -28,12 +28,12 @@
 
             var v1 = new Vec2(1, 0);
             v1 = vMath.normalize(v1);
-            v1 = vMath.mulS(v1, 1);
+            v1 = vMath.mulS(v1, 5);
             AgentService.createAgent(stage, null, new Vec2(radius, stage.getHeight() / 2), v1, radius);
 
             var v2 = new Vec2(-1, 0);
             v2 = vMath.normalize(v2);
-            v2 = vMath.mulS(v2, 1);
+            v2 = vMath.mulS(v2, 10);
             AgentService.createAgent(stage, null, new Vec2(stage.getWidth() - radius, stage.getHeight() / 2), v2, radius);
         }
 
