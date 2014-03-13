@@ -331,7 +331,7 @@
         var agent = AgentServiceFactory.getAgent(name);
         if (agent) {
             var modifiedVel = vMath.mulS(agent.velocity, updateFac);
-            var newPos = vMath.addV(agent.position, modifiedVel);
+            var newPos = vMath.addV(agent.position, agent.velocity);
             agent.setPos(newPos.x, newPos.y);
         }
     };
