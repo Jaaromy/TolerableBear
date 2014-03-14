@@ -5,10 +5,16 @@
     var agents = [];
     var layers = [];
     var selectedAgent = {};
+    var clickCount = 0;
 
     AgentServiceFactory.getSelected = function () {
         return selectedAgent;
     };
+
+    AgentServiceFactory.getClickCount = function () {
+        return clickCount;
+    };
+
 
     function removeLayer(agent) {
         for (var i = 0; i < layers.length; i++) {
@@ -75,6 +81,7 @@
         };
         agent.setListening(true);
         agent.on("click", function () {
+            clickCount++;
             selectedAgent = this;
         });
 
@@ -360,6 +367,7 @@
         agents = [];
         layers = [];
         selectedAgent = {};
+        clickCount = 0;
     };
 
     AgentServiceFactory.drawAllLayers = function () {

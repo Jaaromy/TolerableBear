@@ -41,6 +41,7 @@
         init();
 
         $scope.selected = {};
+        $scope.clickCount = {};
 
         $scope.onTimeout = function () {
             mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
@@ -54,6 +55,8 @@
             AgentService.drawAllLayers();
 
             $scope.selected = AgentService.getSelected();
+
+            $scope.clickCount = AgentService.getClickCount();
         };
 
         var mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
