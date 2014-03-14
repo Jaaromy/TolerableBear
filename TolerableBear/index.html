@@ -15,10 +15,12 @@
 </head>
 <body ng-app="MyModule">
     <h1 class="site-header">Physics and Artificial Intelligence with JavaScript</h1>
-    <div class="btn-group navigation" ng-controller="navcontroller">
-        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'main'">Main</button>
-        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'collisions'">Collisions</button>
-        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'velocity'">Velocity</button>
+    <div class="header-container">
+        <div class="navigation" ng-controller="navcontroller">
+            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'main'">Main</button>
+            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'collisions'">Collisions</button>
+            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'velocity'">Velocity</button>
+        </div>
     </div>
     <div>
         <div ng-view></div>
