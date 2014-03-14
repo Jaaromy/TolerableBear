@@ -5,15 +5,10 @@
     var agents = [];
     var layers = [];
     var selectedAgent = null;
-    var clickCount = 0;
     var preSelectedColor = null;
 
     AgentServiceFactory.getSelected = function () {
         return selectedAgent;
-    };
-
-    AgentServiceFactory.getClickCount = function () {
-        return clickCount;
     };
 
     function removeLayer(agent) {
@@ -69,7 +64,6 @@
     }
 
     function selectObject() {
-        clickCount++;
         if (!preSelectedColor) {
             preSelectedColor = this.fill();
             selectedAgent = this;
@@ -91,16 +85,27 @@
         agent.aname = name ? name : agents.length + 1;
         agent.velocity = velocity;
         agent.position = new Vec2(agent.getX(), agent.getY());
+        agent.text = KineticService.text(agent.aname, agent.position, radius, 'black');
         agent.setPos = function (x, y) {
             this.position.x = x;
             this.position.y = y;
             this.setX(x);
             this.setY(y);
+            if (this.text) {
+                this.text.setX(x);
+                this.text.setY(y);
+            }
         };
         agent.setListening(true);
         agent.on("click", selectObject);
         agent.on('touchstart', selectObject);
-
+        agent.text.setListening(true);
+        agent.text.on("click", function () {
+            agent.fire('click');
+        });
+        agent.text.on('touchstart', function () {
+            agent.fire('touchstart');
+        });
 
         agent.mass = radius * radius;
 
@@ -191,6 +196,8 @@
         }
 
         layers[layers.length - 1].add(agent);
+        layers[layers.length - 1].add(agent.text);
+
 
         if (stage.children.length === 0) {
             stage.add(layers[0]);
@@ -384,7 +391,6 @@
         layers = [];
         selectedAgent = null;
         preSelectedColor = null;
-        clickCount = 0;
     };
 
     AgentServiceFactory.drawAllLayers = function () {

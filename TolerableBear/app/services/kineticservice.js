@@ -17,6 +17,22 @@
         return circle;
     };
 
+    KineticServiceFactory.text = function (textVal, pos, fontSize, color) {
+        var simpleText = new Kinetic.Text({
+            x: pos.x,
+            y: pos.y,
+            text: textVal,
+            fontSize: fontSize,
+            fontFamily: 'Calibri',
+            fill: color
+        });
+
+        simpleText.offsetX(simpleText.width() / 2);
+        simpleText.offsetY(simpleText.height() / 2);
+
+        return simpleText;
+    };
+
     KineticServiceFactory.rect = function (stage) {
         var rect = new $window.Kinetic.Rect({
             x: 239,
