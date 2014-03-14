@@ -5,8 +5,8 @@
     <div ng-show="selected.getX() > 0">
         <div>Selected Object:</div>
         <ul>
-            <li>Position: ({{selected.position.x}},{{selected.position.y}})</li>
-            <li>Velocity: ({{selected.velocity.x}},{{selected.velocity.y}})</li>
+            <li>Position: ({{selected.position.x | number:0}},{{selected.position.y | number:0}})</li>
+            <li>Velocity: ({{selected.velocity.x | number:1}},{{selected.velocity.y | number:1}})</li>
             <li>Mass: {{selected.mass}} kg</li>
         </ul>
     </div>

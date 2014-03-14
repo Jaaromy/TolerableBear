@@ -85,6 +85,11 @@
             selectedAgent = this;
         });
 
+        agent.on('touchstart', function () {
+            clickCount++;
+            selectedAgent = this;
+        });
+
         agent.mass = radius * radius;
 
         agent.checkCollision = function (agent) {
