@@ -1,35 +1,41 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-   <title>Tolerable Bear</title>
-   <script src="scripts/angular.min.js"></script>
-   <script src="scripts/angular-route.min.js"></script>
-   <script src="scripts/moment.min.js"></script>
-   <script src="scripts/kinetic-v5.0.1.min.js"></script>
-   <script src="scripts/TS_vector2-GCopt.js"></script>
-   <script src="scripts/stringformat.js"></script>
+    <title>Tolerable Bear</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="scripts/ui-bootstrap-0.10.0.min.js"></script>
+    <script src="scripts/moment.min.js"></script>
+    <script src="scripts/kinetic-v5.0.1.min.js"></script>
+    <script src="scripts/TS_vector2-GCopt.js"></script>
+    <script src="scripts/stringformat.js"></script>
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 <body ng-app="MyModule">
-   <a href="#/main">Main</a>
-    <a href="#/circle">Circle</a>
-   <a href="#/velocity">Velocity</a>
-   <a href="#/rectangle">Rectangle</a>
-   <div>
-      <div ng-view></div>
-   </div>
+    <h1 class="site-header">Physics and Artificial Intelligence with JavaScript</h1>
+    <div class="btn-group navigation" ng-controller="navcontroller">
+        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'main'">Main</button>
+        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'collisions'">Collisions</button>
+        <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'velocity'">Velocity</button>
+    </div>
+    <div>
+        <div ng-view></div>
+    </div>
 
-   <script src="app/app.js"></script>
+    <script src="app/app.js"></script>
 
-   <!--Controllers-->
-   <script src="app/controllers/maincontroller.js"></script>
-   <script src="app/controllers/circlecontroller.js"></script>
-   <script src="app/controllers/velocitycontroller.js"></script>
-   <script src="app/controllers/rectcontroller.js"></script>
+    <!--Controllers-->
+    <script src="app/controllers/maincontroller.js"></script>
+    <script src="app/controllers/collisioncontroller.js"></script>
+    <script src="app/controllers/velocitycontroller.js"></script>
+    <script src="app/controllers/navcontroller.js"></script>
 
-   <!--Services-->
-   <script src="app/services/timeservice.js"></script>
-   <script src="app/services/kineticservice.js"></script>
-   <script src="app/services/utilityservice.js"></script>
-   <script src="app/services/agentservice.js"></script>
+    <!--Services-->
+    <script src="app/services/timeservice.js"></script>
+    <script src="app/services/kineticservice.js"></script>
+    <script src="app/services/utilityservice.js"></script>
+    <script src="app/services/agentservice.js"></script>
 </body>
 </html>

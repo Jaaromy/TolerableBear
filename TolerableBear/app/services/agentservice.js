@@ -80,7 +80,7 @@
             // Calculate the distance that a collision would occur at.
             //float collisionDistance = (object1.Diameter / 2f) + (object2.Diameter / 2f);
             var collisionDistance = this.radius() + agent.radius();
-            
+
             // Check of the objects are closer that the collision distance.
             if (distanceAtFrameEnd < collisionDistance) {
                 // Move both objects back to the exact point of collision.
@@ -119,7 +119,7 @@
                 //Vector2 vec_c_vel1 = c_vel1 * collisionPlane;
                 var vec_n_vel2_after = vMath.mulS(normalPlane, n_vel2_after);
                 var vec_c_vel2 = vMath.mulS(collisionPlane, c_vel2);
-                var vec_n_vel1_after = vMath.mulS(normalPlane,  n_vel1_after);
+                var vec_n_vel1_after = vMath.mulS(normalPlane, n_vel1_after);
                 var vec_c_vel1 = vMath.mulS(collisionPlane, c_vel1);
 
                 // Combine the vectors back into a single vector in world space.

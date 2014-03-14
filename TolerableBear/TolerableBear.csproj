@@ -60,9 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\navcontroller.js" />
     <Content Include="app\controllers\velocitycontroller.js" />
-    <Content Include="app\controllers\circlecontroller.js" />
-    <Content Include="app\controllers\rectcontroller.js" />
+    <Content Include="app\controllers\collisioncontroller.js" />
     <Content Include="app\controllers\maincontroller.js" />
     <Content Include="app\services\agentservice.js" />
     <Content Include="app\services\kineticservice.js" />
@@ -70,6 +70,11 @@
     <Content Include="app\services\utilityservice.js" />
     <Content Include="app\views\shapes.html" />
     <Content Include="app\views\main.html" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-mocks.js" />
@@ -84,6 +89,10 @@
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\stringformat.js" />
     <Content Include="scripts\TS_vector2-GCopt.js" />
+    <Content Include="scripts\ui-bootstrap-0.10.0.js" />
+    <Content Include="scripts\ui-bootstrap-0.10.0.min.js" />
+    <Content Include="scripts\ui-bootstrap-tpls-0.10.0.js" />
+    <Content Include="scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +102,8 @@
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="packages.config" />
     <Content Include="scripts\angular-route.min.js.map" />
+    <Content Include="css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

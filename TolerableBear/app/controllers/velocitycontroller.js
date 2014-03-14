@@ -2,7 +2,7 @@
     .controller('velocitycontroller', function ($scope, $window, $timeout, KineticService, UtilityService, AgentService) {
         'use strict';
         $scope.windowWidth = function () {
-            return $window.innerWidth;
+            return 1000;
         };
 
         //$scope.windowHeight = function () {
@@ -19,10 +19,10 @@
 
         var stage = {};
         function init() {
-            $scope.pageName = "VELOCITY";
+            $scope.pageName = "Velocity";
             AgentService.updateFrequency = 20;
             AgentService.pixelsPerMeter = 100;
-            stage = KineticService.createStage('container', 1000, 500);
+            stage = KineticService.createStage('container', $scope.windowWidth(), 500);
             AgentService.clear();
             var radius = 25;
             var diam = radius * 2;
@@ -50,8 +50,13 @@
 
             v1 = new Vec2(1, 0);
             v1 = vMath.normalize(v1);
-            v1 = vMath.mulS(v1, 50);
+            v1 = vMath.mulS(v1, 15);
             AgentService.createAgent(stage, null, new Vec2(radius, diam * 5), v1, radius);
+
+            v1 = new Vec2(1, 0);
+            v1 = vMath.normalize(v1);
+            v1 = vMath.mulS(v1, 7);
+            AgentService.createAgent(stage, null, new Vec2(radius, diam * 6), v1, radius);
         }
 
         init();

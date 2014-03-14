@@ -18,6 +18,6 @@
        init();
 
        function init() {
-          $scope.pageName = "MAIN";
+          $scope.pageName = "Main";
        }
     });
