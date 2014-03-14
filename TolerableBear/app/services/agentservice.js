@@ -74,7 +74,6 @@
             this.setY(y);
         };
         agent.setListening(true);
-
         agent.on("click", function () {
             selectedAgent = this;
         });
@@ -173,6 +172,7 @@
             stage.add(layers[0]);
         }
 
+        selectedAgent = agent;
         //addLayer(layer, agent);
         //layers.push(layer);
     };
