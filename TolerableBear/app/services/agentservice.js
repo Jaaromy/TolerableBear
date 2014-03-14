@@ -4,6 +4,11 @@
 
     var agents = [];
     var layers = [];
+    var selectedAgent = {};
+
+    AgentServiceFactory.getSelected = function () {
+        return selectedAgent;
+    };
 
     function removeLayer(agent) {
         for (var i = 0; i < layers.length; i++) {
@@ -68,6 +73,12 @@
             this.setX(x);
             this.setY(y);
         };
+        agent.setListening(true);
+
+        agent.on("click", function () {
+            selectedAgent = this;
+        });
+
         agent.mass = radius * radius;
 
         agent.checkCollision = function (agent) {
@@ -348,6 +359,7 @@
     AgentServiceFactory.clear = function () {
         agents = [];
         layers = [];
+        selectedAgent = {};
     };
 
     AgentServiceFactory.drawAllLayers = function () {

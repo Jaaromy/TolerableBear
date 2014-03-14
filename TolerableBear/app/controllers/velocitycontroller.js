@@ -40,6 +40,8 @@
 
         init();
 
+        $scope.selected = {};
+
         $scope.onTimeout = function () {
             mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
 
@@ -50,6 +52,8 @@
             AgentService.moveAllAgents();
 
             AgentService.drawAllLayers();
+
+            $scope.selected = AgentService.getSelected();
         };
 
         var mytimeout = $timeout($scope.onTimeout, AgentService.updateFrequency);
