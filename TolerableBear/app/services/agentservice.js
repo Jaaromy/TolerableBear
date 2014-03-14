@@ -4,8 +4,9 @@
 
     var agents = [];
     var layers = [];
-    var selectedAgent = {};
+    var selectedAgent = null;
     var clickCount = 0;
+    var preSelectedColor = null;
 
     AgentServiceFactory.getSelected = function () {
         return selectedAgent;
@@ -14,7 +15,6 @@
     AgentServiceFactory.getClickCount = function () {
         return clickCount;
     };
-
 
     function removeLayer(agent) {
         for (var i = 0; i < layers.length; i++) {
@@ -68,6 +68,24 @@
         return AgentServiceFactory.updateFrequency / 1000 * AgentServiceFactory.pixelsPerMeter;
     }
 
+    function selectObject() {
+        clickCount++;
+        if (!preSelectedColor) {
+            preSelectedColor = this.fill();
+            selectedAgent = this;
+            selectedAgent.fill('white');
+        } else if (selectedAgent.aname && selectedAgent.aname != this.aname) {
+            selectedAgent.fill(preSelectedColor);
+            preSelectedColor = this.fill();
+            selectedAgent = this;
+            selectedAgent.fill('white');
+        } else if (!selectedAgent) {
+            preSelectedColor = this.fill();
+            selectedAgent = this;
+            selectedAgent.fill('white');
+        }
+    }
+
     AgentServiceFactory.createAgent = function (stage, name, startPos, velocity, radius) {
         var agent = KineticService.circle(startPos.x, startPos.y, radius);
         agent.aname = name ? name : agents.length + 1;
@@ -80,15 +98,9 @@
             this.setY(y);
         };
         agent.setListening(true);
-        agent.on("click", function () {
-            clickCount++;
-            selectedAgent = this;
-        });
+        agent.on("click", selectObject);
+        agent.on('touchstart', selectObject);
 
-        agent.on('touchstart', function () {
-            clickCount++;
-            selectedAgent = this;
-        });
 
         agent.mass = radius * radius;
 
@@ -184,7 +196,6 @@
             stage.add(layers[0]);
         }
 
-        selectedAgent = agent;
         //addLayer(layer, agent);
         //layers.push(layer);
     };
@@ -371,7 +382,8 @@
     AgentServiceFactory.clear = function () {
         agents = [];
         layers = [];
-        selectedAgent = {};
+        selectedAgent = null;
+        preSelectedColor = null;
         clickCount = 0;
     };
 
