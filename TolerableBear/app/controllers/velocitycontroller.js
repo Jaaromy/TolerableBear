@@ -29,7 +29,7 @@
             var v1 = {};
             var count = 0;
 
-            while (count * diam < stage.getHeight()) {
+            while (diam * count < stage.getHeight() - diam) {
                 count++;
                 v1 = new Vec2(1, 0);
                 v1 = vMath.normalize(v1);
