@@ -1,11 +1,24 @@
 {
-  "name": "Tolerable Bear",
-  "version": "2.0.0",
+  "name" : "TolerableBear",
+  "version" : "0.1.0",
+  "author" : "Jaaromy Zierse",
+  "description": "website containing demonstrations of physics and artificial intelligence",
+  "homepage": "https://github.com/Jaaromy/TolerableBear",
   "private": true,
-  "scripts": {
+  "repository" : { 
+	"type" : "git", 
+	"url" : "https://github.com/Jaaromy/TolerableBear.git"
+  },
+  "keywords": [
+    "ai",
+    "physics",
+	"phaser"
+  ],
+  "licence" : "MIT",
+  "scripts" : {
     "start": "node server"
   },
   "dependencies": {
-    "connect": "*"
+    "connect": "2.14.*"
   }
 }
