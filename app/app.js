@@ -1,4 +1,4 @@
-﻿angular.module('MyModule', ['ngRoute', 'ui.bootstrap']);
+angular.module('MyModule', ['ngRoute', 'ui.bootstrap']);
 
 angular.module('MyModule').config(function ($routeProvider) {
    $routeProvider.when("/", {
@@ -13,6 +13,11 @@ angular.module('MyModule').config(function ($routeProvider) {
 
    $routeProvider.when("/velocity", {
        controller: "velocitycontroller",
+       templateUrl: "app/views/shapes.html"
+   });
+
+   $routeProvider.when("/phasercol", {
+       controller: "phasercollisioncontroller",
        templateUrl: "app/views/shapes.html"
    });
 

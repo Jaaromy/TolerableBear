@@ -1,10 +1,10 @@
-angular.module('MyModule').factory('KineticService', function ($window, UtilityService) {
+angular.module('MyModule').factory('PhaserService', function ($window, UtilityService) {
     'use strict';
-    var KineticServiceFactory = {};
+    var PhaserServiceFactory = {};
 
     var stages = [];
 
-    KineticServiceFactory.circle = function (x, y, radius) {
+    PhaserServiceFactory.circle = function (x, y, radius) {
         var circle = new $window.Kinetic.Circle({
             x: x,
             y: y,
@@ -17,7 +17,7 @@ angular.module('MyModule').factory('KineticService', function ($window, UtilityS
         return circle;
     };
 
-    KineticServiceFactory.text = function (textVal, pos, fontSize, color) {
+    PhaserServiceFactory.text = function (textVal, pos, fontSize, color) {
         var simpleText = new Kinetic.Text({
             x: pos.x,
             y: pos.y,
@@ -33,7 +33,7 @@ angular.module('MyModule').factory('KineticService', function ($window, UtilityS
         return simpleText;
     };
 
-    KineticServiceFactory.rect = function (stage) {
+    PhaserServiceFactory.rect = function (stage) {
         var rect = new $window.Kinetic.Rect({
             x: 239,
             y: 75,
@@ -47,22 +47,17 @@ angular.module('MyModule').factory('KineticService', function ($window, UtilityS
         return rect;
     };
 
-    KineticServiceFactory.layer = function () {
+    PhaserServiceFactory.layer = function () {
         var layer = new $window.Kinetic.Layer();
 
         return layer;
     };
 
-    KineticServiceFactory.createStage = function (container, width, height) {
-        $window.Kinetic.pixelRatio = 1;
-        var stage = new $window.Kinetic.Stage({
-            container: container,
-            width: width ? width : 400,
-            height: height ? height : 300
-        });
+    PhaserServiceFactory.createStage = function (container, width, height, preloadFn, createFn, updateFn) {
+        var stage = new $window.Phaser.Game(width, height, Phaser.AUTO, '', { preload: preloadFn, create: createFn, update: updateFn });
 
         return stage;
     };
 
-    return KineticServiceFactory;
+    return PhaserServiceFactory;
 });
