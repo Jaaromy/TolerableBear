@@ -18,7 +18,7 @@ angular.module('MyModule').config(function ($routeProvider) {
 
    $routeProvider.when("/phasercol", {
        controller: "phasercollisioncontroller",
-       templateUrl: "app/views/shapes.html"
+       templateUrl: "app/views/phaser.html"
    });
 
    $routeProvider.otherwise({ redirectTo: "/" });
