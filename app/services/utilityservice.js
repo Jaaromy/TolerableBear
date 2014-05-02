@@ -1,4 +1,4 @@
-﻿angular.module('MyModule').factory('UtilityService', function ($window) {
+angular.module('MyModule').factory('UtilityService', function ($window) {
    'use strict';
    var UtilityServiceFactory = {};
 

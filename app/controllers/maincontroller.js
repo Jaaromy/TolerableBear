@@ -1,4 +1,4 @@
-﻿angular.module('MyModule')
+angular.module('MyModule')
     .controller('maincontroller', function ($scope, $timeout, TimeService) {
        'use strict';
        $scope.pageName = {};

@@ -1,4 +1,4 @@
-﻿angular.module('MyModule')
+angular.module('MyModule')
     .controller('navcontroller', function ($scope, $location) {
         'use strict';
 

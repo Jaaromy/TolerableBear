@@ -1,4 +1,4 @@
-﻿angular.module('MyModule').factory('AgentService', function ($window, KineticService, UtilityService) {
+angular.module('MyModule').factory('AgentService', function ($window, KineticService, UtilityService) {
     'use strict';
     var AgentServiceFactory = {};
 

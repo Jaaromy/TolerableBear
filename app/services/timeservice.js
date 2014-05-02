@@ -1,4 +1,4 @@
-﻿angular.module('MyModule').factory('TimeService', function ($window) {
+angular.module('MyModule').factory('TimeService', function ($window) {
     'use strict';
     var TimeServiceFactory = {};
 

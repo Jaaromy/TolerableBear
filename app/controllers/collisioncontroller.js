@@ -1,4 +1,4 @@
-﻿angular.module('MyModule')
+angular.module('MyModule')
     .controller('collisioncontroller', function ($scope, $window, $timeout, KineticService, UtilityService, AgentService) {
         'use strict';
         $scope.windowWidth = function () {
