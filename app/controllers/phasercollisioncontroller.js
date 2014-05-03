@@ -27,9 +27,6 @@ angular.module('MyModule')
         }
 
         function create() {
-            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px Arial', fill: '#ffffff' });
-            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px Arial', fill: '#ffffff' });
-            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px Arial', fill: '#ffffff' });
             
             game.time.advancedTiming = true;
             game.physics.startSystem(Phaser.Physics.P2JS);
@@ -41,7 +38,11 @@ angular.module('MyModule')
             circles = game.add.group();
             circles.enableBody = true;
             circles.physicsBodyType = Phaser.Physics.P2JS;
-            
+
+            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px Arial bold', fill: '#ff0000' });
+            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px Arial bold', fill: '#ff0000' });
+            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px Arial bold', fill: '#ff0000' });
+
 //            var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
 
 //            var worldMaterial = game.physics.p2.createMaterial('worldMaterial');
@@ -124,11 +125,18 @@ angular.module('MyModule')
                 circle.body.mass = radius;
             }
         }
+        
+        function destroyCircle() {
+            var circle = circles.children[circles.children.length - 1];
+            circle.body.destroy();
+            circle.destroy();
+            ballCount--;
+        }
 
         var frameCount = 0;
         var totFps = 0;
         function update() {
-            if (frameCount > 600) {
+            if (frameCount > 400) {
                 frameCount = 0;
                 totFps = 0;
             }
@@ -142,8 +150,12 @@ angular.module('MyModule')
             ballCountText.text = 'BALL COUNT: ' + ballCount;
 
             
-            if (avgFps >= 60 && game.time.fps >= 60) {
+            if (avgFps >= 60 && game.time.fps >= 60 && ballCount < 800) {
                 createCircle();
+            }
+            
+            if (avgFps <= 55 && game.time.fps <= 55 && ballCount > 50) {
+                destroyCircle();
             }
             
             for (var i = 0; i < 2; i++)
