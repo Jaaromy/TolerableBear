@@ -1,6 +1,8 @@
 angular.module('MyModule')
     .controller('phasercollisioncontroller', function ($scope, $window, $timeout, UtilityService) {
         'use strict';
+        $scope.myfps;
+        
         $scope.windowWidth = function () {
             return $window.innerWidth;
         };
@@ -11,11 +13,13 @@ angular.module('MyModule')
         });
         
         var game = new $window.Phaser.Game(800, 600, $window.Phaser.AUTO, '', { preload: preload, create: create, update: update });
-        var updatedText;
         var fpsText;
-        var updatedCount = 0;
-        var time;
+        var avgFpsText;
+        var ballCountText;
+        var avgFps = 0;
+        var ballCount = 0;
         var circles;
+        var circleCollisionGroup;
         //var radius = 25;
 
         function preload() {
@@ -23,10 +27,15 @@ angular.module('MyModule')
         }
 
         function create() {
+            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px Arial', fill: '#ffffff' });
+            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px Arial', fill: '#ffffff' });
+            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px Arial', fill: '#ffffff' });
+            
+            game.time.advancedTiming = true;
             game.physics.startSystem(Phaser.Physics.P2JS);
             game.physics.p2.restitution = 0.0;
 
-            var circleCollisionGroup = game.physics.p2.createCollisionGroup();
+            circleCollisionGroup = game.physics.p2.createCollisionGroup();
             game.physics.p2.updateBoundsCollisionGroup();
 
             circles = game.add.group();
@@ -51,43 +60,91 @@ angular.module('MyModule')
 //            contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
 //            contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
 
-            for (var i = 0; i < 450; i++)
+            for (var i = 0; i < 50; i++)
             {
-                var radius = UtilityService.randomInt(8,10);
-                var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
-                if (i < 2) {
-                    circle.width = 120;
-                    circle.height = 120;
-                    circle.body.setCircle(60,0,0,0);
-                    circle.body.mass = 5000;
-
-                    //circle.body.setMaterial(spriteMaterial);
-                    //circle.body.setZeroDamping();
-                    circle.body.setCollisionGroup(circleCollisionGroup);
-                    circle.body.collides(circleCollisionGroup);
-                    circle.body.angle = UtilityService.randomInt(0,359);
-                    circle.body.moveForward(UtilityService.randomInt(500,750));
-                } else {
-                    circle.width = radius * 2;
-                    circle.height = circle.width;
-                    circle.body.setCircle(radius,0,0,0);
-
-                    //circle.body.setMaterial(spriteMaterial);
-                    circle.body.setCollisionGroup(circleCollisionGroup);
-                    circle.body.collides(circleCollisionGroup);
-                    circle.body.angle = UtilityService.randomInt(0,359);
-                    //circle.body.moveForward(UtilityService.randomInt(500,1000));
-                    circle.body.mass = radius;
-                }
+                createCircle();
+//                var radius = UtilityService.randomInt(8,10);
+//                var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
+//                if (i < 2) {
+//                    circle.width = 120;
+//                    circle.height = 120;
+//                    circle.body.setCircle(60,0,0,0);
+//                    circle.body.mass = 5000;
+//
+//                    //circle.body.setMaterial(spriteMaterial);
+//                    //circle.body.setZeroDamping();
+//                    circle.body.setCollisionGroup(circleCollisionGroup);
+//                    circle.body.collides(circleCollisionGroup);
+//                    circle.body.angle = UtilityService.randomInt(0,359);
+//                    circle.body.moveForward(UtilityService.randomInt(500,750));
+//                } else {
+//                    circle.width = radius * 2;
+//                    circle.height = circle.width;
+//                    circle.body.setCircle(radius,0,0,0);
+//
+//                    //circle.body.setMaterial(spriteMaterial);
+//                    circle.body.setCollisionGroup(circleCollisionGroup);
+//                    circle.body.collides(circleCollisionGroup);
+//                    circle.body.angle = UtilityService.randomInt(0,359);
+//                    //circle.body.moveForward(UtilityService.randomInt(500,1000));
+//                    circle.body.mass = radius;
+//                }
             }
             
             //circle.body.moveForward(1000);
             
         }
+        
+        function createCircle() {
+            ballCount++;
+            var radius = UtilityService.randomInt(8,10);
+            var circle = circles.create(0, 0, 'agent');
+            if (circles.children.length <= 2) {
+                circle.width = 120;
+                circle.height = 120;
+                circle.body.setCircle(60,0,0,0);
+                circle.body.mass = 5000;
 
+                //circle.body.setMaterial(spriteMaterial);
+                //circle.body.setZeroDamping();
+                circle.body.setCollisionGroup(circleCollisionGroup);
+                circle.body.collides(circleCollisionGroup);
+                circle.body.angle = UtilityService.randomInt(0,359);
+                //circle.body.moveForward(UtilityService.randomInt(500,750));
+            } else {
+                circle.width = radius * 2;
+                circle.height = circle.width;
+                circle.body.setCircle(radius,0,0,0);
+
+                //circle.body.setMaterial(spriteMaterial);
+                circle.body.setCollisionGroup(circleCollisionGroup);
+                circle.body.collides(circleCollisionGroup);
+                circle.body.angle = UtilityService.randomInt(0,359);
+                //circle.body.moveForward(UtilityService.randomInt(500,1000));
+                circle.body.mass = radius;
+            }
+        }
+
+        var frameCount = 0;
+        var totFps = 0;
         function update() {
-//            updatedText.text = 'updated: ' + updatedCount++;
-//            fpsText.text = 'fps: ' + game.time.fps;
+            if (frameCount > 600) {
+                frameCount = 0;
+                totFps = 0;
+            }
+            
+            frameCount++;
+            totFps += game.time.fps;
+            avgFps = totFps / frameCount;
+
+            fpsText.text = 'FPS: ' + game.time.fps;
+            avgFpsText.text = 'AVG FPS: ' + Math.round(avgFps);
+            ballCountText.text = 'BALL COUNT: ' + ballCount;
+
+            
+            if (avgFps >= 60 && game.time.fps >= 60) {
+                createCircle();
+            }
             
             for (var i = 0; i < 2; i++)
             {
