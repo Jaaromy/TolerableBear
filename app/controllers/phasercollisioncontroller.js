@@ -10,7 +10,7 @@ angular.module('MyModule')
             angular.element(document.querySelectorAll('canvas')).remove();
         });
         
-        var game = new $window.Phaser.Game(1000, 600, $window.Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var game = new $window.Phaser.Game(800, 600, $window.Phaser.AUTO, '', { preload: preload, create: create, update: update });
         var updatedText;
         var fpsText;
         var updatedCount = 0;
@@ -24,45 +24,63 @@ angular.module('MyModule')
 
         function create() {
             game.physics.startSystem(Phaser.Physics.P2JS);
-//            updatedText = game.add.text(16, 16, 'updated: 0', { fontSize: '32px', fill: '#FFF' });
-//            game.time.advancedTiming = true;
-//            fpsText = game.add.text(16, 50, 'fps: 0', { fontSize: '32px', fill: '#FFF' });
-            
-            circles = game.add.group();
-            
-            var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
+            game.physics.p2.restitution = 0.0;
 
-            var worldMaterial = game.physics.p2.createMaterial('worldMaterial');
+            var circleCollisionGroup = game.physics.p2.createCollisionGroup();
+            game.physics.p2.updateBoundsCollisionGroup();
+
+            circles = game.add.group();
+            circles.enableBody = true;
+            circles.physicsBodyType = Phaser.Physics.P2JS;
+            
+//            var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
+
+//            var worldMaterial = game.physics.p2.createMaterial('worldMaterial');
             //  4 trues = the 4 faces of the world in left, right, top, bottom order
             //game.physics.p2.setWorldMaterial(worldMaterial, true, true, true, true);
 
             //  Here is the contact material. It's a combination of 2 materials, so whenever shapes with
             //  those 2 materials collide it uses the following settings.
             //  A single material can be used by as many different sprites as you like.
-            var contactMaterial = game.physics.p2.createContactMaterial(spriteMaterial, worldMaterial);
-            contactMaterial.friction = 0.0;     // Friction to use in the contact of these two materials.
-            contactMaterial.restitution = 1000.0;  // Restitution (i.e. how bouncy it is!) to use in the contact of these two materials.
-            contactMaterial.stiffness = 1e7;    // Stiffness of the resulting ContactEquation that this ContactMaterial generate.
-            contactMaterial.relaxation = 3;     // Relaxation of the resulting ContactEquation that this ContactMaterial generate.
-            contactMaterial.frictionStiffness = 1e7;    // Stiffness of the resulting FrictionEquation that this ContactMaterial generate.
-            contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
-            contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
+//            var contactMaterial = game.physics.p2.createContactMaterial(spriteMaterial, worldMaterial);
+//            contactMaterial.friction = 0.0;     // Friction to use in the contact of these two materials.
+//            contactMaterial.restitution = 1000.0;  // Restitution (i.e. how bouncy it is!) to use in the contact of these two materials.
+//            contactMaterial.stiffness = 1e7;    // Stiffness of the resulting ContactEquation that this ContactMaterial generate.
+//            contactMaterial.relaxation = 3;     // Relaxation of the resulting ContactEquation that this ContactMaterial generate.
+//            contactMaterial.frictionStiffness = 1e7;    // Stiffness of the resulting FrictionEquation that this ContactMaterial generate.
+//            contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
+//            contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
 
-            for (var i = 0; i < 75; i++)
+            for (var i = 0; i < 400; i++)
             {
-                var radius = UtilityService.randomInt(10,50);
-                var circle = circles.create(UtilityService.randomInt(50,950), UtilityService.randomInt(50,550), 'agent');
-                circle.width = radius * 2;
-                circle.height = circle.width;
-                game.physics.p2.enable(circle);
+                var radius = UtilityService.randomInt(6,15);
+                var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
+                if (i < 3) {
+                    circle.width = 100;
+                    circle.height = 100;
+                    circle.body.setCircle(50,0,0,0);
+                    circle.body.mass = 5000;
 
-                //circle.body.setMaterial(spriteMaterial);
-                circle.body.setCircle(radius,0,0,0);
-                circle.body.angle = UtilityService.randomInt(0,359);
-                circle.body.moveForward(UtilityService.randomInt(500,1000));
-                circle.body.mass = radius;
+                    //circle.body.setMaterial(spriteMaterial);
+                    //circle.body.setZeroDamping();
+                    circle.body.setCollisionGroup(circleCollisionGroup);
+                    circle.body.collides(circleCollisionGroup);
+                    circle.body.angle = UtilityService.randomInt(0,359);
+                    circle.body.moveForward(UtilityService.randomInt(500,750));
+                } else {
+                    circle.width = radius * 2;
+                    circle.height = circle.width;
+                    circle.body.setCircle(radius,0,0,0);
+
+                    //circle.body.setMaterial(spriteMaterial);
+                    circle.body.setCollisionGroup(circleCollisionGroup);
+                    circle.body.collides(circleCollisionGroup);
+                    circle.body.angle = UtilityService.randomInt(0,359);
+                    //circle.body.moveForward(UtilityService.randomInt(500,1000));
+                    circle.body.mass = radius;
+                }
             }
-
+            
             //circle.body.moveForward(1000);
             
         }
@@ -71,12 +89,14 @@ angular.module('MyModule')
 //            updatedText.text = 'updated: ' + updatedCount++;
 //            fpsText.text = 'fps: ' + game.time.fps;
             
-//            for (var i = 0; i < circles.children.length; i++)
-//            {
-//                circles.children[i].body.moveForward(50);
-//            }
-            //circle.body.moveForward(50);
-            
+            for (var i = 0; i < 3; i++)
+            {
+                var circle = circles.children[i];
+                if (circle.body.velocity.x > -2.0 && circle.body.velocity.x < 2.0 && circle.body.velocity.y > -2.0 && circle.body.velocity.y < 2.0) {
+                    circle.body.angle = UtilityService.randomInt(0,359);
+                    circle.body.moveForward(UtilityService.randomInt(200,500));
+                }
+            }
         }
         
         function init() {

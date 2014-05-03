@@ -1,7 +1,7 @@
 angular.module('MyModule', ['ngRoute', 'ui.bootstrap']);
 
 angular.module('MyModule').config(function ($routeProvider) {
-   $routeProvider.when("/", {
+   $routeProvider.when("/main", {
       controller: "maincontroller",
       templateUrl: "app/views/main.html"
    });
@@ -21,5 +21,5 @@ angular.module('MyModule').config(function ($routeProvider) {
        templateUrl: "app/views/phaser.html"
    });
 
-   $routeProvider.otherwise({ redirectTo: "/" });
+   $routeProvider.otherwise({ redirectTo: "/phasercol" });
 });
