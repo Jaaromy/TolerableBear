@@ -39,9 +39,9 @@ angular.module('MyModule')
             circles.enableBody = true;
             circles.physicsBodyType = Phaser.Physics.P2JS;
 
-            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px Arial bold', fill: '#ff0000' });
-            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px Arial bold', fill: '#ff0000' });
-            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px Arial bold', fill: '#ff0000' });
+            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px', fill: '#ff0000' });
+            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px', fill: '#ff0000' });
+            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px', fill: '#ff0000' });
 
 //            var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
 
@@ -136,7 +136,7 @@ angular.module('MyModule')
         var frameCount = 0;
         var totFps = 0;
         function update() {
-            if (frameCount > 400) {
+            if (frameCount > 180) {
                 frameCount = 0;
                 totFps = 0;
             }
