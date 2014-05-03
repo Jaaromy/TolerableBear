@@ -51,9 +51,9 @@ angular.module('MyModule')
 //            contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
 //            contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
 
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 450; i++)
             {
-                var radius = UtilityService.randomInt(12,20);
+                var radius = UtilityService.randomInt(8,10);
                 var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
                 if (i < 2) {
                     circle.width = 120;
