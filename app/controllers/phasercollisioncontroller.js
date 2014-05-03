@@ -12,7 +12,7 @@ angular.module('MyModule')
             angular.element(document.querySelectorAll('canvas')).remove();
         });
         
-        var game = new $window.Phaser.Game(800, 600, $window.Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var game = new $window.Phaser.Game($window.innerWidth - 40, 600, $window.Phaser.AUTO, '', { preload: preload, create: create, update: update });
         var fpsText;
         var avgFpsText;
         var ballCountText;
@@ -20,6 +20,7 @@ angular.module('MyModule')
         var ballCount = 0;
         var circles;
         var circleCollisionGroup;
+        var fpsToggle = false;
         //var radius = 25;
 
         function preload() {
@@ -27,6 +28,16 @@ angular.module('MyModule')
         }
 
         function create() {
+            game.input.keyboard.onDownCallback = function(e) {
+                // 'F' key pressed
+                if (e.keyCode == 70) {
+                    fpsToggle = !fpsToggle;
+                }
+            };
+            
+            game.input.touch.onTouchEnd = function(e) {
+                fpsToggle = !fpsToggle;
+            }
             
             game.time.advancedTiming = true;
             game.physics.startSystem(Phaser.Physics.P2JS);
@@ -39,9 +50,9 @@ angular.module('MyModule')
             circles.enableBody = true;
             circles.physicsBodyType = Phaser.Physics.P2JS;
 
-            fpsText = game.add.text(16, 14, 'FPS: 0', { font: '12px', fill: '#ff0000' });
-            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: '12px', fill: '#ff0000' });
-            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: '12px', fill: '#ff0000' });
+            fpsText = game.add.text(16, 14, 'FPS: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
+            avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
+            ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
 
 //            var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial');
 
@@ -99,7 +110,25 @@ angular.module('MyModule')
         function createCircle() {
             ballCount++;
             var radius = UtilityService.randomInt(8,10);
-            var circle = circles.create(0, 0, 'agent');
+            var circle;
+            
+            var corner = UtilityService.randomInt(1,4);
+            switch(corner)
+            {
+                case 1:
+                  circle = circles.create(0, 0, 'agent');
+                  break;
+                case 2:
+                  circle = circles.create(0, game.world.height, 'agent');
+                  break;
+                case 3:
+                  circle = circles.create(game.world.width, game.world.height, 'agent');
+                  break;
+                default:
+                  circle = circles.create(game.world.width, 0, 'agent');
+            }
+                
+            
             if (circles.children.length <= 2) {
                 circle.width = 120;
                 circle.height = 120;
@@ -145,9 +174,15 @@ angular.module('MyModule')
             totFps += game.time.fps;
             avgFps = totFps / frameCount;
 
-            fpsText.text = 'FPS: ' + game.time.fps;
-            avgFpsText.text = 'AVG FPS: ' + Math.round(avgFps);
-            ballCountText.text = 'BALL COUNT: ' + ballCount;
+            if (fpsToggle) {
+                fpsText.text = 'FPS: ' + game.time.fps;
+                avgFpsText.text = 'AVG FPS: ' + Math.round(avgFps);
+                ballCountText.text = 'BALL COUNT: ' + ballCount;
+            } else {
+                fpsText.text = '';
+                avgFpsText.text = '';
+                ballCountText.text = '';
+            }
 
             
             if (avgFps >= 60 && game.time.fps >= 60 && ballCount < 800) {
