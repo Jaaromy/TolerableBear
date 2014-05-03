@@ -51,14 +51,14 @@ angular.module('MyModule')
 //            contactMaterial.frictionRelaxation = 3;     // Relaxation of the resulting FrictionEquation that this ContactMaterial generate.
 //            contactMaterial.surfaceVelocity = 0;        // Will add surface velocity to this material. If bodyA rests on top if bodyB, and the surface velocity is positive, bodyA will slide to the right.
 
-            for (var i = 0; i < 300; i++)
+            for (var i = 0; i < 200; i++)
             {
-                var radius = UtilityService.randomInt(6,15);
+                var radius = UtilityService.randomInt(12,20);
                 var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
-                if (i < 3) {
-                    circle.width = 100;
-                    circle.height = 100;
-                    circle.body.setCircle(50,0,0,0);
+                if (i < 2) {
+                    circle.width = 150;
+                    circle.height = 150;
+                    circle.body.setCircle(74,0,0,0);
                     circle.body.mass = 5000;
 
                     //circle.body.setMaterial(spriteMaterial);
@@ -89,7 +89,7 @@ angular.module('MyModule')
 //            updatedText.text = 'updated: ' + updatedCount++;
 //            fpsText.text = 'fps: ' + game.time.fps;
             
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < 2; i++)
             {
                 var circle = circles.children[i];
                 if (circle.body.velocity.x > -2.0 && circle.body.velocity.x < 2.0 && circle.body.velocity.y > -2.0 && circle.body.velocity.y < 2.0) {
