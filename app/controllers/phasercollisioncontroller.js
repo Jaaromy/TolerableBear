@@ -21,6 +21,8 @@ angular.module('MyModule')
         var circles;
         var circleCollisionGroup;
         var fpsToggle = false;
+        var colorSwapToggle = false;
+        var whiteToggle = false;
         //var radius = 25;
 
         function preload() {
@@ -32,6 +34,12 @@ angular.module('MyModule')
                 // 'F' key pressed
                 if (e.keyCode == 70) {
                     fpsToggle = !fpsToggle;
+                // 'C' key pressed
+                } else if (e.keyCode == 67) {
+                    colorSwapToggle = !colorSwapToggle;
+                // 'W' key pressed
+                } else if (e.keyCode == 87) {
+                    whiteToggle = !whiteToggle;
                 }
             };
             
@@ -74,7 +82,7 @@ angular.module('MyModule')
 
             for (var i = 0; i < 50; i++)
             {
-                createCircle();
+                //createCircle();
 //                var radius = UtilityService.randomInt(8,10);
 //                var circle = circles.create(game.world.randomX, game.world.randomY, 'agent');
 //                if (i < 2) {
@@ -107,9 +115,26 @@ angular.module('MyModule')
             
         }
         
+        function circleContact(a, b, c, d) {
+            if (whiteToggle && b.collisionGroup == c.collisionGroup) {
+                d[0].bodyA.parent.sprite.tint = 0xffffff;
+            } 
+            else if (colorSwapToggle && b.collisionGroup == c.collisionGroup && (d[0].bodyA.id != 5 && d[0].bodyB.id != 5 && d[0].bodyA.id != 6 && d[0].bodyB.id != 6 )) {
+                var v1 = new Vec2(d[0].bodyA.velocity[0], d[0].bodyA.velocity[1]);
+                var v2 = new Vec2(d[0].bodyB.velocity[0], d[0].bodyB.velocity[1]);
+                var len1 = vMath.length(v1);
+                var len2 = vMath.length(v2);
+                if (len1 > len2 && len1 > 6) {
+                    d[0].bodyB.parent.sprite.tint = d[0].bodyA.parent.sprite.tint;
+                } else if (len2 > len1 && len2 > 6) {
+                    d[0].bodyA.parent.sprite.tint = d[0].bodyB.parent.sprite.tint;
+                }
+            }
+        }
+        
         function createCircle() {
             ballCount++;
-            var radius = UtilityService.randomInt(8,10);
+            var radius = UtilityService.randomInt(6,8);
             var circle;
             
             var corner = UtilityService.randomInt(1,4);
@@ -117,15 +142,19 @@ angular.module('MyModule')
             {
                 case 1:
                   circle = circles.create(0, 0, 'agent');
+                  circle.tint = whiteToggle ? 0xffffff : 0x0000ff;
                   break;
                 case 2:
                   circle = circles.create(0, game.world.height, 'agent');
+                  circle.tint = whiteToggle ? 0xffffff : 0xff00ff;
                   break;
                 case 3:
                   circle = circles.create(game.world.width, game.world.height, 'agent');
+                  circle.tint = whiteToggle ? 0xffffff : 0xffff00;
                   break;
                 default:
                   circle = circles.create(game.world.width, 0, 'agent');
+                  circle.tint = whiteToggle ? 0xffffff : 0xff0000;
             }
                 
             
@@ -134,6 +163,7 @@ angular.module('MyModule')
                 circle.height = 120;
                 circle.body.setCircle(60,0,0,0);
                 circle.body.mass = 5000;
+                circle.tint = 0xffffff;
 
                 //circle.body.setMaterial(spriteMaterial);
                 //circle.body.setZeroDamping();
@@ -145,6 +175,8 @@ angular.module('MyModule')
                 circle.width = radius * 2;
                 circle.height = circle.width;
                 circle.body.setCircle(radius,0,0,0);
+                
+                circle.body.onBeginContact.add(circleContact, this);
 
                 //circle.body.setMaterial(spriteMaterial);
                 circle.body.setCollisionGroup(circleCollisionGroup);
@@ -183,9 +215,8 @@ angular.module('MyModule')
                 avgFpsText.text = '';
                 ballCountText.text = '';
             }
-
             
-            if (avgFps >= 60 && game.time.fps >= 60 && ballCount < 800) {
+            if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 1400) || ballCount < 2) {
                 createCircle();
             }
             
@@ -193,12 +224,14 @@ angular.module('MyModule')
                 destroyCircle();
             }
             
-            for (var i = 0; i < 2; i++)
-            {
-                var circle = circles.children[i];
-                if (circle.body.velocity.x > -2.0 && circle.body.velocity.x < 2.0 && circle.body.velocity.y > -2.0 && circle.body.velocity.y < 2.0) {
-                    circle.body.angle = UtilityService.randomInt(0,359);
-                    circle.body.moveForward(UtilityService.randomInt(200,500));
+            if (ballCount >= 2) {
+                for (var i = 0; i < 2; i++)
+                {
+                    var circle = circles.children[i];
+                    if (circle.body.velocity.x > -2.0 && circle.body.velocity.x < 2.0 && circle.body.velocity.y > -2.0 && circle.body.velocity.y < 2.0) {
+                        circle.body.angle = UtilityService.randomInt(0,359);
+                        circle.body.moveForward(UtilityService.randomInt(200,500));
+                    }
                 }
             }
         }
