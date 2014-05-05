@@ -151,11 +151,37 @@ angular.module('MyModule')
         }
         
         function destroyCircle() {
-            var circle = circles.children[2];
+            var circle;
             
-            if (circle.body.id != mainCircle1.body.id && circle.body.id != mainCircle2.body.id) {
+            for (var i = 2; i < circles.children.length; i++) {
+                circle = circles.children[i];
+                if (!circle.body) {
+                    continue;
+                }
+                
+                var left = circles.children[i].x - circles.children[i].width / 2;
+                var top = circles.children[i].y - circles.children[i].width / 2;
+                var right = circles.children[i].x + circles.children[i].width / 2;
+                var bot = circles.children[i].y + circles.children[i].width / 2;
+                
+                if (left <= 0) {
+                    break;
+                } else if (right >= game.world.width) {
+                    break;
+                } else if (top <= 0) {
+                    break;
+                } else if (bot >= game.world.height) {
+                    break;
+                }
+                
+                circle = null;
+            }
+            
+            
+            if (circle && circle.body && circle.body.id != mainCircle1.body.id && circle.body.id != mainCircle2.body.id) {
                 circle.body.destroy();
-                circle.destroy();
+                circle.body = null;
+                //circle.destroy();
                 ballCount--;
             }
         }
