@@ -151,7 +151,7 @@ angular.module('MyModule')
         }
         
         function destroyCircle() {
-            var circle = circles.children[circles.children.length - 1];
+            var circle = circles.children[2];
             
             if (circle.body.id != mainCircle1.body.id && circle.body.id != mainCircle2.body.id) {
                 circle.body.destroy();
