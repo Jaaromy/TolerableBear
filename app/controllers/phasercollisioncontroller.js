@@ -14,8 +14,12 @@ angular.module('MyModule')
         var fpsText;
         var avgFpsText;
         var ballCountText;
+        var whiteToggleText;
+        var colorSwapText;
         var avgFps = 0;
         var ballCount = 0;
+        var frameCount = 0;
+        var totFps = 0;
         var circles;
         var circleCollisionGroup;
         var fpsToggle = false;
@@ -63,6 +67,9 @@ angular.module('MyModule')
             fpsText = game.add.text(16, 14, 'FPS: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
             avgFpsText = game.add.text(16, 28, 'AVG FPS: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
             ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
+            whiteToggleText = game.add.text(16, 56, 'WHITE MODE: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
+            colorSwapText = game.add.text(16, 70, 'COLOR SWAP: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
+            
         }
         
         function circleContact(a, b, c, d) {
@@ -186,8 +193,6 @@ angular.module('MyModule')
             }
         }
 
-        var frameCount = 0;
-        var totFps = 0;
         function update() {
             if (frameCount > 180) {
                 frameCount = 0;
@@ -202,13 +207,17 @@ angular.module('MyModule')
                 fpsText.text = 'FPS: ' + game.time.fps;
                 avgFpsText.text = 'AVG FPS: ' + Math.round(avgFps);
                 ballCountText.text = 'BALL COUNT: ' + ballCount;
+                whiteToggleText.text = 'WHITE MODE: ' + (whiteToggle ? 'ON' : 'OFF');
+                colorSwapText.text = 'COLOR SWAP: ' + (colorSwapToggle ? 'ON' : 'OFF');
             } else {
                 fpsText.text = '';
                 avgFpsText.text = '';
                 ballCountText.text = '';
+                whiteToggleText.text = '';
+                colorSwapText.text = '';
             }
             
-            if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 1400) || ballCount < 20) {
+            if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 1000) || ballCount < 20) {
                 createCircle();
             }
             
