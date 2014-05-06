@@ -1,3 +1,7 @@
+body, html {
+  height: 97%;
+}
+
 body {
     padding: 0 20px 0 20px;
 }
@@ -10,7 +14,7 @@ nav{
     padding: 0;
     margin-right: 10px;
     border-right: thin solid;
-    height:2000px;
+    height:97%;
 }
 
 h2, h3 {
