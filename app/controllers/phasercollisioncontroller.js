@@ -181,7 +181,7 @@ angular.module('MyModule')
             if (circle && circle.body && circle.body.id != mainCircle1.body.id && circle.body.id != mainCircle2.body.id) {
                 circle.body.destroy();
                 circle.body = null;
-                //circle.destroy();
+                circle.destroy();
                 ballCount--;
             }
         }
