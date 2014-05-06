@@ -16,6 +16,17 @@
 </head>
 <body ng-app="MyModule">
     <h1 class="site-header">Physics and Artificial Intelligence with JavaScript</h1>
+    <nav>
+        <h2>DEMOS</h2>
+        <div><a href="#/main">Main</a></div>
+        <h3>Phaser.js</h3>
+        <div><a href="#/phasercol">Phaser Collisions</a></div>
+        <div><a href="#/waypoints">Waypoints</a></div>
+        <h3>Kinetic.js</h3>
+        <div><a href="#/collisions">Collisions</a></div>
+        <div><a href="#/velocity">Velocity</a></div>
+    </nav>
+<!--
     <div class="header-container">
         <div class="navigation" ng-controller="navcontroller">
             <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/main'">Main</button>
@@ -25,9 +36,10 @@
             <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/waypoints'">Waypoints</button>
         </div>
     </div>
-    <div>
+-->
+    <section id="main">
         <div ng-view></div>
-    </div>
+    </section>
 
     <script src="app/app.js"></script>
 

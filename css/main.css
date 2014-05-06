@@ -2,13 +2,47 @@ body {
     padding: 0 20px 0 20px;
 }
 
+nav{    
+    width: 150px;
+    float: left;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+    border-right: thin solid;
+    height:2000px;
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+nav h2 {
+    font: bold 18px Courier New, monospace;
+}
+
+nav h3 {
+    font: bold 14px Courier New, monospace;
+}
+
+nav h2,h3 {
+    text-align: center;
+}
+
+section#main{
+    margin: 0;
+    padding: 0;
+    display: inline;     
+}
+
 .site-header {
     text-align:center;
 }
 
-.header-container {
-}
-
-.navigation {
-    text-align:center;
+#container {
+    width:600px;
+    height:600px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
 }
