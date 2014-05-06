@@ -231,10 +231,6 @@ angular.module('MyModule')
         
         function init() {
             $scope.pageName = "Phaser.js Collisions";
-            var v1 = {};
-            var radius = {};
-            var startPos = {};
-            var i = 0;
         }
 
         init();

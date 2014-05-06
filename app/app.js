@@ -18,8 +18,14 @@ angular.module('MyModule').config(function ($routeProvider) {
 
    $routeProvider.when("/phasercol", {
        controller: "phasercollisioncontroller",
-       templateUrl: "app/views/phaser.html"
+       templateUrl: "app/views/phasercol.html"
    });
+    
+   $routeProvider.when("/waypoints", {
+       controller: "waypointcontroller",
+       templateUrl: "app/views/waypoint.html"
+   });
+
 
    $routeProvider.otherwise({ redirectTo: "/phasercol" });
 });
