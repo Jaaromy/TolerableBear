@@ -24,8 +24,8 @@ angular.module('MyModule')
         function createAgent(x, y) {
             var agent;
             agent = agents.create(x, y, 'agent');
-            agent.width = 20;
-            agent.height = 20;
+            agent.width = 15;
+            agent.height = 15;
             agent.anchor.setTo(0.5, 1.0);
             agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(1,6)) * deltaTime;
 
@@ -51,25 +51,56 @@ angular.module('MyModule')
             target.tint = 0x00ffff;
             game.physics.enable(target, Phaser.Physics.P2JS);
             
-            var a1 = createAgent(100,100);
-            var a2 = createAgent(200,200);
-            var a3 = createAgent(300,300);
-            var a4 = createAgent(400,400);
+            for(var i = 0; i < 10; i++) {
+                createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
+            }
+            
+//            var a1 = createAgent(100,100);
+//            var a2 = createAgent(200,200);
+//            var a3 = createAgent(300,300);
+//            var a4 = createAgent(400,400);
         }
         
         var deltaTime = 0.016667;
         function move(agent) {
-            agent.body.moveForward(100);
-            agent.body.rotation += agent.body.rotPerFrame;
-            if (agent.body.rotation > game.math.PI2) {
-                agent.body.rotation = agent.body.rotation - game.math.PI2;
+            var pi4 = (game.math.PI2 / 4)
+            var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
+            
+            agent.body.moveForward(50);
+            
+            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
+                if (agent.body.rotation < angle) {
+                    agent.body.rotation += agent.body.rotPerFrame;
+                } else {
+                    agent.body.rotation -= agent.body.rotPerFrame;
+                }
+
+                if (agent.body.rotation > game.math.PI2) {
+                    agent.body.rotation -= game.math.PI2;
+                } else if (agent.body.rotation < 0) {
+                    agent.body.rotation += game.math.PI2;
+                }
             }
         }
         
+        var wFrameCount = 120;
+        var wSpeed = 100;
+
         function update() {
             for(var i = 0; i < agents.children.length; i++) {
                 move(agents.children[i]);
             }
+            
+            wFrameCount++;
+            
+            if (wFrameCount >= 120) {
+                wFrameCount = 0;
+                var angle = game.rnd.integerInRange(0, 359);
+                wSpeed = game.rnd.integerInRange(100,150);
+                target.body.angle = angle;
+                target.body.moveForward(wSpeed);
+            }
+
         }
         
         function init() {
