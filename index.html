@@ -21,22 +21,12 @@
         <div><a href="#/main">Main</a></div>
         <h3>Phaser.js</h3>
         <div><a href="#/phasercol">Phaser Collisions</a></div>
-        <div><a href="#/waypoints">Waypoints</a></div>
+        <div><a href="#/facing">Facing</a></div>
+        <div><a href="#/flock">Flock</a></div>
         <h3>Kinetic.js</h3>
         <div><a href="#/collisions">Collisions</a></div>
         <div><a href="#/velocity">Velocity</a></div>
     </nav>
-<!--
-    <div class="header-container">
-        <div class="navigation" ng-controller="navcontroller">
-            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/main'">Main</button>
-            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/collisions'">Collisions</button>
-            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/velocity'">Velocity</button>
-            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/phasercol'">Phaser Collisions</button>
-            <button type="button" class="btn btn-primary" ng-model="navModel" data-btn-radio="'/waypoints'">Waypoints</button>
-        </div>
-    </div>
--->
     <section id="main">
         <div ng-view></div>
     </section>
@@ -49,7 +39,8 @@
     <script src="app/controllers/velocitycontroller.js"></script>
     <script src="app/controllers/navcontroller.js"></script>
     <script src="app/controllers/phasercollisioncontroller.js"></script>
-    <script src="app/controllers/waypointcontroller.js"></script>
+    <script src="app/controllers/facingcontroller.js"></script>
+    <script src="app/controllers/flockcontroller.js"></script>
 
     <!--Services-->
     <script src="app/services/timeservice.js"></script>

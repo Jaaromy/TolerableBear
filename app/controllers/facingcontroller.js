@@ -1,5 +1,5 @@
 angular.module('MyModule')
-    .controller('waypointcontroller', function ($scope, $window, $timeout, UtilityService) {
+    .controller('facingcontroller', function ($scope, $window, $timeout, UtilityService) {
         'use strict';
         $scope.windowWidth = function () {
             return $window.innerWidth;
@@ -78,7 +78,7 @@ angular.module('MyModule')
         }
         
         function init() {
-            $scope.pageName = "Waypoints";
+            $scope.pageName = "Facing";
         }
 
         init();

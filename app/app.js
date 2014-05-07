@@ -21,9 +21,14 @@ angular.module('MyModule').config(function ($routeProvider) {
        templateUrl: "app/views/phasercol.html"
    });
     
-   $routeProvider.when("/waypoints", {
-       controller: "waypointcontroller",
-       templateUrl: "app/views/waypoint.html"
+   $routeProvider.when("/facing", {
+       controller: "facingcontroller",
+       templateUrl: "app/views/facing.html"
+   });
+
+   $routeProvider.when("/flock", {
+       controller: "flockcontroller",
+       templateUrl: "app/views/flock.html"
    });
 
 
