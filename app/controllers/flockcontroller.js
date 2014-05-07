@@ -27,6 +27,7 @@ angular.module('MyModule')
             agent.width = 20;
             agent.height = 20;
             agent.anchor.setTo(0.5, 1.0);
+            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(1,6)) * deltaTime;
 
             agent.body.setCollisionGroup(agentCollisionGroup);
 //            agent.body.collides(circleCollisionGroup);
@@ -50,15 +51,19 @@ angular.module('MyModule')
             target.tint = 0x00ffff;
             game.physics.enable(target, Phaser.Physics.P2JS);
             
-            createAgent(100,100);
-            createAgent(200,200);
-            createAgent(300,300);
-            createAgent(400,400);
+            var a1 = createAgent(100,100);
+            var a2 = createAgent(200,200);
+            var a3 = createAgent(300,300);
+            var a4 = createAgent(400,400);
         }
         
+        var deltaTime = 0.016667;
         function move(agent) {
             agent.body.moveForward(100);
-            agent.body.rotateRight(30);
+            agent.body.rotation += agent.body.rotPerFrame;
+            if (agent.body.rotation > game.math.PI2) {
+                agent.body.rotation = agent.body.rotation - game.math.PI2;
+            }
         }
         
         function update() {
