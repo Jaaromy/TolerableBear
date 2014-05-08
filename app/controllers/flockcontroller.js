@@ -66,21 +66,32 @@ angular.module('MyModule')
             var pi4 = (game.math.PI2 / 4)
             var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
             
-            agent.body.moveForward(50);
+            agent.body.moveForward(90);
             
-            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
-                if (agent.body.rotation < angle) {
-                    agent.body.rotation += agent.body.rotPerFrame;
-                } else {
-                    agent.body.rotation -= agent.body.rotPerFrame;
-                }
-
-                if (agent.body.rotation > game.math.PI2) {
-                    agent.body.rotation -= game.math.PI2;
-                } else if (agent.body.rotation < 0) {
-                    agent.body.rotation += game.math.PI2;
-                }
-            }
+            var p = new Vec2(target.position.x, target.position.y);
+            var t = new Vec2(agent.position.x, agent.position.y);
+            var h = new Vec2(agent.body.velocity.x, agent.body.velocity.y);
+            var H = vMath.normalize(h);
+            var tp = vMath.subV(p, t);
+            var TP = vMath.normalize(tp);
+            var dot = vMath.dot(TP, H);
+            var theta = Math.acos(dot);
+            
+            agent.body.rotation = theta;
+            
+//            if (Math.abs(agent.body.rotation - theta) > agent.body.rotPerFrame ) {
+//                if (agent.body.rotation < theta) {
+//                    agent.body.rotation += agent.body.rotPerFrame;
+//                } else {
+//                    agent.body.rotation -= agent.body.rotPerFrame;
+//                }
+//
+//                if (agent.body.rotation > game.math.PI2) {
+//                    agent.body.rotation -= game.math.PI2;
+//                } else if (agent.body.rotation < 0) {
+//                    agent.body.rotation += game.math.PI2;
+//                }
+//            }
         }
         
         var wFrameCount = 120;
