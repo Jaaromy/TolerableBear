@@ -77,21 +77,21 @@ angular.module('MyModule')
             var dot = vMath.dot(TP, H);
             var theta = Math.acos(dot);
             
-            agent.body.rotation = theta;
+//            agent.body.rotation = theta;
             
-//            if (Math.abs(agent.body.rotation - theta) > agent.body.rotPerFrame ) {
-//                if (agent.body.rotation < theta) {
-//                    agent.body.rotation += agent.body.rotPerFrame;
-//                } else {
-//                    agent.body.rotation -= agent.body.rotPerFrame;
-//                }
-//
-//                if (agent.body.rotation > game.math.PI2) {
-//                    agent.body.rotation -= game.math.PI2;
-//                } else if (agent.body.rotation < 0) {
-//                    agent.body.rotation += game.math.PI2;
-//                }
-//            }
+            if (Math.abs(agent.body.rotation - theta) > agent.body.rotPerFrame ) {
+                if (agent.body.rotation < theta) {
+                    agent.body.rotation += agent.body.rotPerFrame;
+                } else {
+                    agent.body.rotation -= agent.body.rotPerFrame;
+                }
+
+                if (agent.body.rotation > game.math.PI2) {
+                    agent.body.rotation -= game.math.PI2;
+                } else if (agent.body.rotation < 0) {
+                    agent.body.rotation += game.math.PI2;
+                }
+            }
         }
         
         var wFrameCount = 120;
