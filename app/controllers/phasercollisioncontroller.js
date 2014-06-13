@@ -23,7 +23,7 @@ angular.module('MyModule')
         var circles;
         var circleCollisionGroup;
         var fpsToggle = false;
-        var colorSwapToggle = false;
+        var colorSwapToggle = true;
         var whiteToggle = false;
         var mainCircle1;
         var mainCircle2;
