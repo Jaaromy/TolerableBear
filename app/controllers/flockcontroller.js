@@ -30,6 +30,7 @@ angular.module('MyModule')
             agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(1,6)) * deltaTime;
 
             agent.body.setCollisionGroup(agentCollisionGroup);
+            agent.body.collideWorldBounds = false;
 //            agent.body.collides(circleCollisionGroup);
 //            agent.body.angle = UtilityService.randomInt(0,359);
             
@@ -43,13 +44,16 @@ angular.module('MyModule')
             agents.physicsBodyType = Phaser.Physics.P2JS;
             
             agentCollisionGroup = game.physics.p2.createCollisionGroup();
+            var targetCollisionGroup = game.physics.p2.createCollisionGroup();
+            game.physics.p2.updateBoundsCollisionGroup();
             
             target = game.add.sprite(300,300,'target');
             target.width = 15;
             target.height = target.width;
             target.anchor.setTo(0.5, 0.5);
             target.tint = 0x00ffff;
-            game.physics.enable(target, Phaser.Physics.P2JS);
+            game.physics.p2.enable(target);
+            target.body.setCollisionGroup(targetCollisionGroup);
             
             for(var i = 0; i < 10; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
