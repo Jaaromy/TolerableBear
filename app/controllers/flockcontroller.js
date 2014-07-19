@@ -27,10 +27,10 @@ angular.module('MyModule')
             agent.width = 15;
             agent.height = 15;
             agent.anchor.setTo(0.5, 1.0);
-            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(1,6)) * deltaTime;
+            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,2)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
-            agent.speed = game.rnd.integerInRange(15,60);
+            agent.speed = game.rnd.integerInRange(60,90);
 
 
             agent.body.setCollisionGroup(agentCollisionGroup);
@@ -59,7 +59,7 @@ angular.module('MyModule')
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
             
-            for(var i = 0; i < 10; i++) {
+            for(var i = 0; i < 20; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
             
@@ -75,7 +75,16 @@ angular.module('MyModule')
             var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
             
             agent.body.moveForward(agent.speed);
-            agent.body.rotation = angle;
+            //agent.body.rotation = angle;
+            
+            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
+                if (agent.body.rotation < angle) {
+                    agent.body.rotation += agent.body.rotPerFrame;
+                } else {
+                    agent.body.rotation -= agent.body.rotPerFrame;
+                }
+            }
+
             
 //            var p = new Vec2(target.position.x, target.position.y);
 //            var t = new Vec2(agent.position.x, agent.position.y);
@@ -104,7 +113,7 @@ angular.module('MyModule')
         }
         
         var wFrameCount = 120;
-        var wSpeed = 100;
+        var wSpeed = 50;
 
         function update() {
             for(var i = 0; i < agents.children.length; i++) {
@@ -116,7 +125,7 @@ angular.module('MyModule')
             if (wFrameCount >= 120) {
                 wFrameCount = 0;
                 var angle = game.rnd.integerInRange(0, 359);
-                wSpeed = game.rnd.integerInRange(100,150);
+                wSpeed = game.rnd.integerInRange(20,30);
                 target.body.angle = angle;
                 target.body.moveForward(wSpeed);
             }
