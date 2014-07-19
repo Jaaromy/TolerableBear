@@ -29,13 +29,22 @@ angular.module('MyModule')
             agent.width = 40;
             agent.height = 40;
             
+            var collisionGroup = game.physics.p2.createCollisionGroup();
+            game.physics.p2.updateBoundsCollisionGroup();
+            
             waypoint = game.add.sprite(400, 50, 'waypoint');
             waypoint.width = 40;
             waypoint.height = 40;
             waypoint.tint = 0xff00ff;
             
-            game.physics.enable(agent, Phaser.Physics.P2JS);
-            game.physics.enable(waypoint, Phaser.Physics.P2JS);
+            game.physics.p2.enable(agent);
+            game.physics.p2.enable(waypoint);
+            
+            agent.body.setCollisionGroup(collisionGroup);
+            agent.body.collides(collisionGroup);
+            waypoint.body.setCollisionGroup(collisionGroup);
+            waypoint.body.collides(collisionGroup);
+            
             //statsText = game.add.text(16, 14, 'ANGLE: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
         }
 
