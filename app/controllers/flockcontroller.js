@@ -60,7 +60,7 @@ angular.module('MyModule')
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
             
-            for(var i = 0; i < 400; i++) {
+            for(var i = 0; i < 100; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
             
@@ -184,7 +184,10 @@ angular.module('MyModule')
             if (avgFps <= 55 && game.time.fps <= 55) {
                 destroyAgent();
             }
-
+            
+            if ((avgFps >= 60 && game.time.fps >= 60) {
+                createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
+            }
         }
         
         function init() {
