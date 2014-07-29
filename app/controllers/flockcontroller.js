@@ -24,13 +24,13 @@ angular.module('MyModule')
         function createAgent(x, y) {
             var agent;
             agent = agents.create(x, y, 'agent');
-            agent.width = 15;
-            agent.height = 15;
+            agent.width = 6;
+            agent.height = 6;
             agent.anchor.setTo(0.5, 1.0);
-            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,2)) * deltaTime;
+            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,6)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
-            agent.speed = game.rnd.integerInRange(60,90);
+            agent.speed = game.rnd.integerInRange(60,120);
 
 
             agent.body.setCollisionGroup(agentCollisionGroup);
@@ -59,7 +59,7 @@ angular.module('MyModule')
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
             
-            for(var i = 0; i < 20; i++) {
+            for(var i = 0; i < 150; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
             
@@ -136,7 +136,7 @@ angular.module('MyModule')
             if (wFrameCount >= 120) {
                 wFrameCount = 0;
                 var angle = game.rnd.integerInRange(0, 359);
-                wSpeed = game.rnd.integerInRange(20,30);
+                wSpeed = game.rnd.integerInRange(20,200);
                 target.body.angle = angle;
                 target.body.moveForward(wSpeed);
             }
