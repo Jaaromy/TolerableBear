@@ -59,7 +59,7 @@ angular.module('MyModule')
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
             
-            for(var i = 0; i < 1000; i++) {
+            for(var i = 0; i < 400; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
             
