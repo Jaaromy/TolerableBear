@@ -185,7 +185,7 @@ angular.module('MyModule')
                 destroyAgent();
             }
             
-            if ((avgFps >= 60 && game.time.fps >= 60) {
+            if (avgFps >= 60 && game.time.fps >= 60) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
         }
