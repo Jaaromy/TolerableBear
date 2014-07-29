@@ -46,6 +46,7 @@ angular.module('MyModule')
             agents = game.add.group();
             agents.enableBody = true;
             agents.physicsBodyType = Phaser.Physics.P2JS;
+            game.time.advancedTiming = true;
             
             agentCollisionGroup = game.physics.p2.createCollisionGroup();
             var targetCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -123,8 +124,31 @@ angular.module('MyModule')
 //            }
         }
         
+        function destroyAgent() {
+            var agent;
+            
+            for (var i = 0; i < agents.children.length; i++) {
+                agent = agents.children[i];
+                if (!agent.body) {
+                    continue;
+                }
+                
+                if (agent && agent.body) {
+                    agent.body.destroy();
+                    agent.body = null;
+                    agent.destroy();
+                    break;
+                }
+                
+                agent = null;
+            }
+        }
+
+        
         var wFrameCount = 120;
         var wSpeed = 50;
+        var totFps = 0;
+        var avgFps = 0;
         
         function moveTarget() {
             var angle = game.rnd.integerInRange(0, 359);
@@ -139,9 +163,12 @@ angular.module('MyModule')
             }
             
             wFrameCount++;
+            totFps += game.time.fps;
+            avgFps = totFps / wFrameCount;
             
             if (wFrameCount >= 120) {
                 wFrameCount = 0;
+                totFps = 0;
                 moveTarget();
             }
             
@@ -153,6 +180,11 @@ angular.module('MyModule')
                 target.body.angle = target.body.angle - 180;
                 target.body.moveForward(wSpeed);
             }
+            
+            if (avgFps <= 55 && game.time.fps <= 55) {
+                destroyAgent();
+            }
+
         }
         
         function init() {
