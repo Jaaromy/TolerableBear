@@ -71,8 +71,19 @@ angular.module('MyModule')
         
         var deltaTime = 0.016667;
         function move(agent) {
-            var pi4 = (game.math.PI2 / 4)
-            var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
+            //var pi4 = (game.math.PI2 / 4)
+            //var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
+            
+            //Swap y position to correctly calculate in Quad I.
+            var tmpp1 = new Vec2(agent.position.x, target.position.y);
+            var tmpp2 = new Vec2(target.position.x, agent.position.y);
+    
+            var vecp1p2 = vMath.normalize(vMath.subV(tmpp2, tmpp1));
+            var angle = Math.atan2(vecp1p2.x, vecp1p2.y);
+            
+            if (angle < 0) {
+                angle = (2 * Math.PI) + angle;
+            }
             
             agent.body.moveForward(agent.speed);
             //agent.body.rotation = angle;
