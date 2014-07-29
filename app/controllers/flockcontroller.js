@@ -30,7 +30,7 @@ angular.module('MyModule')
             agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,6)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
-            agent.speed = game.rnd.integerInRange(60,120);
+            agent.speed = game.rnd.integerInRange(120,160);
 
 
             agent.body.setCollisionGroup(agentCollisionGroup);
@@ -59,7 +59,7 @@ angular.module('MyModule')
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
             
-            for(var i = 0; i < 150; i++) {
+            for(var i = 0; i < 200; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
             
