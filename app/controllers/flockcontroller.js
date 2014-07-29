@@ -27,7 +27,7 @@ angular.module('MyModule')
             agent.width = 6;
             agent.height = 6;
             agent.anchor.setTo(0.5, 1.0);
-            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,6)) * deltaTime;
+            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(5,6)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
             agent.speed = game.rnd.integerInRange(120,160);
