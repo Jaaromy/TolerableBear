@@ -151,6 +151,7 @@ angular.module('MyModule')
                 (target.position.y > game.height - 100)) {
                 
                 target.body.angle = target.body.angle - 180;
+                target.body.moveForward(wSpeed);
             }
         }
         
