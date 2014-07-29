@@ -125,6 +125,13 @@ angular.module('MyModule')
         
         var wFrameCount = 120;
         var wSpeed = 50;
+        
+        function moveTarget() {
+            var angle = game.rnd.integerInRange(0, 359);
+            wSpeed = game.rnd.integerInRange(20,200);
+            target.body.angle = angle;
+            target.body.moveForward(wSpeed);
+        }
 
         function update() {
             for(var i = 0; i < agents.children.length; i++) {
@@ -135,12 +142,16 @@ angular.module('MyModule')
             
             if (wFrameCount >= 120) {
                 wFrameCount = 0;
-                var angle = game.rnd.integerInRange(0, 359);
-                wSpeed = game.rnd.integerInRange(20,200);
-                target.body.angle = angle;
-                target.body.moveForward(wSpeed);
+                moveTarget();
             }
-
+            
+            if ((target.position.x < 100) || 
+                (target.position.x > game.width - 100) || 
+                (target.position.y < 100) || 
+                (target.position.y > game.height - 100)) {
+                
+                target.body.angle = target.body.angle - 180;
+            }
         }
         
         function init() {
