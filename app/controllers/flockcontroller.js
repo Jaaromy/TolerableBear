@@ -133,14 +133,28 @@ angular.module('MyModule')
                     continue;
                 }
                 
-                if (agent && agent.body) {
-                    agent.body.destroy();
-                    agent.body = null;
-                    agent.destroy();
+                var left = agents.children[i].x - agents.children[i].width / 2;
+                var top = agents.children[i].y - agents.children[i].width / 2;
+                var right = agents.children[i].x + agents.children[i].width / 2;
+                var bot = agents.children[i].y + agents.children[i].width / 2;
+                
+                if (left <= 0) {
+                    break;
+                } else if (right >= game.world.width) {
+                    break;
+                } else if (top <= 0) {
+                    break;
+                } else if (bot >= game.world.height) {
                     break;
                 }
-                
+
                 agent = null;
+            }
+            
+            if (agent && agent.body) {
+                agent.body.destroy();
+                agent.body = null;
+                agent.destroy();
             }
         }
 
