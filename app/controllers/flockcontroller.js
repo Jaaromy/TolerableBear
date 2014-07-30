@@ -97,6 +97,25 @@ angular.module('MyModule')
                 return;
             }
             
+            if (absDiff > Math.PI && diff < 0) {
+                agent.body.rotation -= agent.body.rotPerFrame;
+            } else if (absDiff > Math.PI && diff > 0) {
+                agent.body.rotation += agent.body.rotPerFrame;
+            } else if ((absDiff) > agent.body.rotPerFrame ) {
+                if (agent.body.rotation < angle) {
+                    agent.body.rotation += agent.body.rotPerFrame;
+                } else {
+                    agent.body.rotation -= agent.body.rotPerFrame;
+                }
+            }
+            
+            if (agent.body.rotation < 0) {
+                agent.body.rotation += twoPi;
+            } else if (agent.body.rotation > twoPi) {
+                agent.body.rotation -= twoPi;
+            }
+
+
 //            if (absDiff > Math.PI) {
 //                if (absDiff + agent.body.rotPerFrame > (2 * Math.PI)) {
 //                    
@@ -104,13 +123,13 @@ angular.module('MyModule')
 //            } else {
 //            }
             
-            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
-                if (agent.body.rotation < angle) {
-                    agent.body.rotation += agent.body.rotPerFrame;
-                } else {
-                    agent.body.rotation -= agent.body.rotPerFrame;
-                }
-            }
+//            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
+//                if (agent.body.rotation < angle) {
+//                    agent.body.rotation += agent.body.rotPerFrame;
+//                } else {
+//                    agent.body.rotation -= agent.body.rotPerFrame;
+//                }
+//            }
 
             
 //            var p = new Vec2(target.position.x, target.position.y);
