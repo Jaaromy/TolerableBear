@@ -71,6 +71,7 @@ angular.module('MyModule')
         }
         
         var deltaTime = 0.016667;
+        var twoPi = Math.PI * 2;
         function move(agent) {
             //var pi4 = (game.math.PI2 / 4)
             //var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
@@ -83,11 +84,25 @@ angular.module('MyModule')
             var angle = Math.atan2(vecp1p2.x, vecp1p2.y);
             
             if (angle < 0) {
-                angle = (2 * Math.PI) + angle;
+                angle = twoPi + angle;
             }
             
             agent.body.moveForward(agent.speed);
             //agent.body.rotation = angle;
+            var diff = agent.body.rotation - angle;
+            var absDiff = Math.abs(diff);
+            
+            if ((Math.abs(agent.body.rotation + twoPi - angle) < agent.body.rotPerFrame) ||
+                (Math.abs(angle + twoPi - agent.body.rotation) < agent.body.rotPerFrame)) {
+                return;
+            }
+            
+//            if (absDiff > Math.PI) {
+//                if (absDiff + agent.body.rotPerFrame > (2 * Math.PI)) {
+//                    
+//                }
+//            } else {
+//            }
             
             if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
                 if (agent.body.rotation < angle) {
