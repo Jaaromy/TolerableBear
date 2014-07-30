@@ -27,7 +27,7 @@ angular.module('MyModule')
             agent.width = 6;
             agent.height = 6;
             agent.anchor.setTo(0.5, 1.0);
-            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,4)) * deltaTime;
+            agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(1,5)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
             agent.speed = game.rnd.integerInRange(120,160);
@@ -35,8 +35,6 @@ angular.module('MyModule')
 
             agent.body.setCollisionGroup(agentCollisionGroup);
             agent.body.collideWorldBounds = false;
-//            agent.body.collides(circleCollisionGroup);
-//            agent.body.angle = UtilityService.randomInt(0,359);
             
             return agent;
         }
@@ -63,19 +61,12 @@ angular.module('MyModule')
             for(var i = 0; i < 150; i++) {
                 createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
             }
-            
-//            var a1 = createAgent(100,100);
-//            var a2 = createAgent(200,200);
-//            var a3 = createAgent(300,300);
-//            var a4 = createAgent(400,400);
         }
         
         var deltaTime = 0.016667;
         var twoPi = Math.PI * 2;
+
         function move(agent) {
-            //var pi4 = (game.math.PI2 / 4)
-            //var angle = game.math.angleBetweenPoints(agent.position, target.position) + pi4;
-            
             //Swap y position to correctly calculate in Quad I.
             var tmpp1 = new Vec2(agent.position.x, target.position.y);
             var tmpp2 = new Vec2(target.position.x, agent.position.y);
@@ -88,7 +79,7 @@ angular.module('MyModule')
             }
             
             agent.body.moveForward(agent.speed);
-            //agent.body.rotation = angle;
+
             var diff = agent.body.rotation - angle;
             var absDiff = Math.abs(diff);
             
@@ -114,48 +105,6 @@ angular.module('MyModule')
             } else if (agent.body.rotation > twoPi) {
                 agent.body.rotation -= twoPi;
             }
-
-
-//            if (absDiff > Math.PI) {
-//                if (absDiff + agent.body.rotPerFrame > (2 * Math.PI)) {
-//                    
-//                }
-//            } else {
-//            }
-            
-//            if (Math.abs(agent.body.rotation - angle) > agent.body.rotPerFrame ) {
-//                if (agent.body.rotation < angle) {
-//                    agent.body.rotation += agent.body.rotPerFrame;
-//                } else {
-//                    agent.body.rotation -= agent.body.rotPerFrame;
-//                }
-//            }
-
-            
-//            var p = new Vec2(target.position.x, target.position.y);
-//            var t = new Vec2(agent.position.x, agent.position.y);
-//            var h = new Vec2(agent.body.velocity.x, agent.body.velocity.y);
-//            var H = vMath.normalize(h);
-//            var tp = vMath.subV(p, t);
-//            var TP = vMath.normalize(tp);
-//            var dot = vMath.dot(TP, H);
-//            var theta = Math.acos(dot);
-//            
-////            agent.body.rotation = theta;
-//            
-//            if (Math.abs(agent.body.rotation - theta) > agent.body.rotPerFrame ) {
-//                if (agent.body.rotation < theta) {
-//                    agent.body.rotation += agent.body.rotPerFrame;
-//                } else {
-//                    agent.body.rotation -= agent.body.rotPerFrame;
-//                }
-//
-//                if (agent.body.rotation > game.math.PI2) {
-//                    agent.body.rotation -= game.math.PI2;
-//                } else if (agent.body.rotation < 0) {
-//                    agent.body.rotation += game.math.PI2;
-//                }
-//            }
         }
         
         function destroyAgent() {
@@ -200,7 +149,7 @@ angular.module('MyModule')
         
         function moveTarget() {
             var angle = game.rnd.integerInRange(0, 359);
-            wSpeed = game.rnd.integerInRange(20,200);
+            wSpeed = game.rnd.integerInRange(20,100);
             target.body.angle = angle;
             target.body.moveForward(wSpeed);
         }
@@ -214,7 +163,7 @@ angular.module('MyModule')
             totFps += game.time.fps;
             avgFps = totFps / wFrameCount;
             
-            if (wFrameCount >= 120) {
+            if (wFrameCount >= 240) {
                 wFrameCount = 0;
                 totFps = 0;
                 moveTarget();
