@@ -182,7 +182,7 @@ angular.module('MyModule')
                 destroyAgent();
             }
             
-            if (avgFps >= 60 && game.time.fps >= 60 && agents.children.length < 350) {
+            if ((avgFps >= 60 && game.time.fps >= 60 && agents.children.length < 350) || agents.children.length < 100) {
                 switch(game.rnd.integerInRange(1,2))
                 {
                     case 1:
