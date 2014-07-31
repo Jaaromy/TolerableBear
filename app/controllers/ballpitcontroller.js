@@ -1,5 +1,5 @@
 angular.module('MyModule')
-    .controller('phasercollisioncontroller', function ($scope, $window, $timeout, UtilityService) {
+    .controller('ballpitcontroller', function ($scope, $window, $timeout, UtilityService) {
         'use strict';
         $scope.windowWidth = function () {
             return $window.innerWidth;

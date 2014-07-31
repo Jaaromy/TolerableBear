@@ -1,5 +1,5 @@
 angular.module('MyModule')
-    .controller('flockcontroller', function ($scope, $window, $timeout, UtilityService) {
+    .controller('followcontroller', function ($scope, $window, $timeout, UtilityService) {
         'use strict';
         $scope.windowWidth = function () {
             return $window.innerWidth;
@@ -196,7 +196,7 @@ angular.module('MyModule')
         }
         
         function init() {
-            $scope.pageName = "Flocking";
+            $scope.pageName = "Follow";
         }
 
         init();

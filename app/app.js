@@ -1,4 +1,4 @@
-angular.module('MyModule', ['ngRoute', 'ui.bootstrap']);
+angular.module('MyModule', ['ngRoute']);
 
 angular.module('MyModule').config(function ($routeProvider) {
    $routeProvider.when("/main", {
@@ -16,14 +16,19 @@ angular.module('MyModule').config(function ($routeProvider) {
        templateUrl: "app/views/shapes.html"
    });
 
-   $routeProvider.when("/phasercol", {
-       controller: "phasercollisioncontroller",
-       templateUrl: "app/views/phasercol.html"
+   $routeProvider.when("/ballpit", {
+       controller: "ballpitcontroller",
+       templateUrl: "app/views/ballpit.html"
    });
     
    $routeProvider.when("/facing", {
        controller: "facingcontroller",
        templateUrl: "app/views/facing.html"
+   });
+
+   $routeProvider.when("/follow", {
+       controller: "followcontroller",
+       templateUrl: "app/views/follow.html"
    });
 
    $routeProvider.when("/flock", {
@@ -32,5 +37,5 @@ angular.module('MyModule').config(function ($routeProvider) {
    });
 
 
-   $routeProvider.otherwise({ redirectTo: "/phasercol" });
+   $routeProvider.otherwise({ redirectTo: "/ballpit" });
 });
