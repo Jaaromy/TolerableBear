@@ -32,7 +32,6 @@ angular.module('MyModule')
             //TODO: custom property. Remove when flocking fixed.
             agent.speed = game.rnd.integerInRange(100,150);
 
-
             agent.body.setCollisionGroup(agentCollisionGroup);
             agent.body.collideWorldBounds = false;
             
@@ -57,10 +56,6 @@ angular.module('MyModule')
             target.tint = 0x00ffff;
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
-            
-//            for(var i = 0; i < 150; i++) {
-//                createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
-//            }
         }
         
         var deltaTime = 0.016667;

@@ -57,10 +57,6 @@ angular.module('MyModule')
             target.tint = 0x00ffff;
             game.physics.p2.enable(target);
             target.body.setCollisionGroup(targetCollisionGroup);
-            
-//            for(var i = 0; i < 150; i++) {
-//                createAgent(UtilityService.randomInt(50, 550), UtilityService.randomInt(50, 550));
-//            }
         }
         
         var deltaTime = 0.016667;
