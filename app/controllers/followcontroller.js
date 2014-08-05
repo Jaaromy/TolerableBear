@@ -37,8 +37,6 @@ angular.module('MyModule')
             agent.body.setCollisionGroup(agentCollisionGroup);
             agent.body.collideWorldBounds = false;
             
-            agent.tint = parseInt(randomColor({ luminosity: 'bright', hue: 'pink' }).substr(1),16);
-            
             return agent;
         }
         
@@ -147,6 +145,8 @@ angular.module('MyModule')
         var wSpeed = 50;
         var totFps = 0;
         var avgFps = 0;
+        var cFrameCount = 0;
+        var color = 0xffffff;
         
         function moveTarget() {
             var angle = game.rnd.integerInRange(0, 359);
@@ -168,15 +168,20 @@ angular.module('MyModule')
 
             for(var i = 0; i < agents.children.length; i++) {
                 move(agents.children[i]);
+                agents.children[i].tint = color;
             }
 
-            
+            cFrameCount++;
             wFrameCount++;
             totFps += game.time.fps;
             avgFps = totFps / wFrameCount;
             
 //            fpsText.text = 'FPS: ' + game.time.fps;
             
+            if (cFrameCount >= 240) {
+                cFrameCount = 0;
+                color = parseInt(randomColor({ luminosity: 'light', hue: 'random' }).substr(1),16);
+            }
             
             if (wFrameCount >= 60) {
                 wFrameCount = 0;
