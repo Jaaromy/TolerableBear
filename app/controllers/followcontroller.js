@@ -20,6 +20,7 @@ angular.module('MyModule')
         var agents;
         var target;
         var agentCollisionGroup;
+//        var fpsText;
         
         function createAgent(x, y) {
             var agent;
@@ -30,11 +31,13 @@ angular.module('MyModule')
             agent.body.rotPerFrame = (game.math.PI2 / UtilityService.randomInt(2,4)) * deltaTime;
             
             //TODO: custom property. Remove when flocking fixed.
-            agent.speed = game.rnd.integerInRange(100,150);
+            agent.speed = game.rnd.integerInRange(120,160);
 
 
             agent.body.setCollisionGroup(agentCollisionGroup);
             agent.body.collideWorldBounds = false;
+            
+            agent.tint = parseInt(randomColor({ luminosity: 'bright', hue: 'random' }).substr(1),16);
             
             return agent;
         }
@@ -45,6 +48,8 @@ angular.module('MyModule')
             agents.enableBody = true;
             agents.physicsBodyType = Phaser.Physics.P2JS;
             game.time.advancedTiming = true;
+            
+//            fpsText = game.add.text(16, 14, 'FPS: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
             
             agentCollisionGroup = game.physics.p2.createCollisionGroup();
             var targetCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -59,7 +64,7 @@ angular.module('MyModule')
             target.body.setCollisionGroup(targetCollisionGroup);
         }
         
-        var deltaTime = 0.016667;
+        var deltaTime = 0.016667;//0.03333;
         var twoPi = Math.PI * 2;
 
         function move(agent) {
@@ -151,13 +156,27 @@ angular.module('MyModule')
         }
 
         function update() {
+//            if (wFrameCount % 2 == 0) {
+//                for(var i = 0; i < ~~(agents.children.length / 2); i++) {
+//                    move(agents.children[i]);
+//                }
+//            } else {
+//                for(var i = ~~(agents.children.length / 2); i < agents.children.length; i++) {
+//                    move(agents.children[i]);
+//                }
+//            }
+
             for(var i = 0; i < agents.children.length; i++) {
                 move(agents.children[i]);
             }
+
             
             wFrameCount++;
             totFps += game.time.fps;
             avgFps = totFps / wFrameCount;
+            
+//            fpsText.text = 'FPS: ' + game.time.fps;
+            
             
             if (wFrameCount >= 60) {
                 wFrameCount = 0;
@@ -178,7 +197,7 @@ angular.module('MyModule')
                 destroyAgent();
             }
             
-            if ((avgFps >= 60 && game.time.fps >= 60 && agents.children.length < 300) || agents.children.length < 100) {
+            if ((avgFps >= 60 && game.time.fps >= 60 && agents.children.length < 200) || agents.children.length < 100) {
                 switch(game.rnd.integerInRange(1,2))
                 {
                     case 1:
