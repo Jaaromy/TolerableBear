@@ -37,7 +37,7 @@ angular.module('MyModule')
             agent.body.setCollisionGroup(agentCollisionGroup);
             agent.body.collideWorldBounds = false;
             
-            agent.tint = parseInt(randomColor({ luminosity: 'bright', hue: 'random' }).substr(1),16);
+            agent.tint = parseInt(randomColor({ luminosity: 'bright', hue: 'pink' }).substr(1),16);
             
             return agent;
         }
