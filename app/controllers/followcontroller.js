@@ -146,7 +146,7 @@ angular.module('MyModule')
         var totFps = 0;
         var avgFps = 0;
         var cFrameCount = 0;
-        var color = 0xffffff;
+        var color = parseInt(randomColor({ luminosity: 'light', hue: 'random' }).substr(1),16);//0xffffff;
         
         function moveTarget() {
             var angle = game.rnd.integerInRange(0, 359);
@@ -180,7 +180,7 @@ angular.module('MyModule')
             
             if (cFrameCount >= 240) {
                 cFrameCount = 0;
-                color = parseInt(randomColor({ luminosity: 'light', hue: 'random' }).substr(1),16);
+//                color = parseInt(randomColor({ luminosity: 'light', hue: 'random' }).substr(1),16);
             }
             
             if (wFrameCount >= 60) {
