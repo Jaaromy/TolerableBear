@@ -1,4 +1,3 @@
-/// <reference path="../typings/jquery/jquery.d.ts"/>
 /// <reference path="../typings/angularjs/angular.d.ts"/>
 angular.module('MyModule', ['ngRoute']);
 
@@ -7,7 +6,7 @@ angular.module('MyModule').config(function ($routeProvider) {
       controller: "maincontroller",
       templateUrl: "app/views/main.html"
    });
-$.get();
+
    $routeProvider.when("/collisions", {
       controller: "collisioncontroller",
       templateUrl: "app/views/shapes.html"
