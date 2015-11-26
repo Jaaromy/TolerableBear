@@ -16,6 +16,9 @@ angular.module('MyModule')
         var ballCountText;
         var whiteToggleText;
         var colorSwapText;
+        var main1VelocityText;
+        var main2VelocityText;
+        
         var avgFps = 0;
         var ballCount = 0;
         var frameCount = 0;
@@ -69,7 +72,8 @@ angular.module('MyModule')
             ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
             whiteToggleText = game.add.text(16, 56, 'WHITE MODE: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
             colorSwapText = game.add.text(16, 70, 'COLOR SWAP: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
-            
+            main1VelocityText = game.add.text(16, 84, 'main1Velolcity: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
+            main2VelocityText = game.add.text(16, 98, 'main2Velocityh: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
         }
         
         function circleContact(a, b, c, d) {
@@ -111,10 +115,10 @@ angular.module('MyModule')
         }
         
         function accelerateSlow(circle) {
-            if (circle.body.velocity.x > -2.0 && 
-                circle.body.velocity.x < 2.0 && 
-                circle.body.velocity.y > -2.0 && 
-                circle.body.velocity.y < 2.0) {
+            if (circle.body.velocity.x > -20.0 && 
+                circle.body.velocity.x < 20.0 && 
+                circle.body.velocity.y > -20.0 && 
+                circle.body.velocity.y < 20.0) {
                 circle.body.angle = UtilityService.randomInt(0,359);
                 circle.body.moveForward(UtilityService.randomInt(200,500));
             }
@@ -209,12 +213,16 @@ angular.module('MyModule')
                 ballCountText.text = 'BALL COUNT: ' + ballCount;
                 whiteToggleText.text = 'WHITE MODE: ' + (whiteToggle ? 'ON' : 'OFF');
                 colorSwapText.text = 'COLOR SWAP: ' + (colorSwapToggle ? 'ON' : 'OFF');
+                main1VelocityText.text = 'MAIN1VEL x: ' +  Math.round(mainCircle1.body.velocity.x) + ' y: ' + Math.round(mainCircle1.body.velocity.y);
+                main2VelocityText.text = 'MAIN2VEL x: ' +  Math.round(mainCircle2.body.velocity.x) + ' y: ' + Math.round(mainCircle2.body.velocity.y);
             } else {
                 fpsText.text = '';
                 avgFpsText.text = '';
                 ballCountText.text = '';
                 whiteToggleText.text = '';
                 colorSwapText.text = '';
+                main1VelocityText.text = '';
+                main2VelocityText.text = '';
             }
             
             if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 1000) || ballCount < 20) {
