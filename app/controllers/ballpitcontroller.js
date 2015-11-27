@@ -10,7 +10,7 @@ angular.module('MyModule')
             angular.element(document.querySelectorAll('canvas')).remove();
         });
         
-        var game = new $window.Phaser.Game(600, 600, $window.Phaser.AUTO, 'container', { preload: preload, create: create, update: update });
+        var game = new $window.Phaser.Game(400, 400, $window.Phaser.AUTO, 'container', { preload: preload, create: create, update: update });
         var fpsText;
         var avgFpsText;
         var ballCountText;
@@ -72,27 +72,29 @@ angular.module('MyModule')
             ballCountText = game.add.text(16, 42, 'BALL COUNT: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
             whiteToggleText = game.add.text(16, 56, 'WHITE MODE: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
             colorSwapText = game.add.text(16, 70, 'COLOR SWAP: FALSE', { font: 'bold 14px Arial', fill: '#ff0000' });
-            main1VelocityText = game.add.text(16, 84, 'main1Velolcity: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
-            main2VelocityText = game.add.text(16, 98, 'main2Velocityh: 0', { font: 'bold 14px Arial', fill: '#ff0000' });
+            main1VelocityText = game.add.text(16, 84, '', { font: 'bold 14px Arial', fill: '#ff0000' });
+            main2VelocityText = game.add.text(16, 98, '', { font: 'bold 14px Arial', fill: '#ff0000' });
         }
         
         function circleContact(a, b, c, d) {
-            if (whiteToggle && b.collisionGroup === c.collisionGroup) {
-                d[0].bodyA.parent.sprite.tint = 0xffffff;
+            if (whiteToggle && c.collisionGroup === d.collisionGroup) {
+                c.body.parent.sprite.tint = 0xffffff;
             } 
-            else if (colorSwapToggle && b.collisionGroup === c.collisionGroup && 
-                     (d[0].bodyA.id !== mainCircle1.body.id && 
-                      d[0].bodyB.id !== mainCircle1.body.id && 
-                      d[0].bodyA.id !== mainCircle2.body.id && 
-                      d[0].bodyB.id !== mainCircle2.body.id )) {
-                var v1 = new $window.Vec2(d[0].bodyA.velocity[0], d[0].bodyA.velocity[1]);
-                var v2 = new $window.Vec2(d[0].bodyB.velocity[0], d[0].bodyB.velocity[1]);
+            else if (colorSwapToggle && 
+                    c.collisionGroup === d.collisionGroup &&
+                    c.body.parent.sprite.tint !== d.body.parent.sprite.tint &&
+                    (d.body.id !== mainCircle1.body.id && 
+                     c.body.id !== mainCircle1.body.id && 
+                     d.body.id !== mainCircle2.body.id && 
+                     c.body.id !== mainCircle2.body.id)) {
+                var v1 = new $window.Vec2(c.body.velocity[0], c.body.velocity[1]);
+                var v2 = new $window.Vec2(d.body.velocity[0], d.body.velocity[1]);
                 var len1 = $window.vMath.length(v1);
                 var len2 = $window.vMath.length(v2);
-                if (len1 > len2 && len1 > 6) {
-                    d[0].bodyB.parent.sprite.tint = d[0].bodyA.parent.sprite.tint;
-                } else if (len2 > len1 && len2 > 6) {
-                    d[0].bodyA.parent.sprite.tint = d[0].bodyB.parent.sprite.tint;
+                if (len1 > len2 && len1 > 10) {
+                    d.body.parent.sprite.tint = c.body.parent.sprite.tint;
+                } else if (len2 > len1 && len2 > 10) {
+                    c.body.parent.sprite.tint = d.body.parent.sprite.tint;
                 }
             }
         }
@@ -213,8 +215,8 @@ angular.module('MyModule')
                 ballCountText.text = 'BALL COUNT: ' + ballCount;
                 whiteToggleText.text = 'WHITE MODE: ' + (whiteToggle ? 'ON' : 'OFF');
                 colorSwapText.text = 'COLOR SWAP: ' + (colorSwapToggle ? 'ON' : 'OFF');
-                main1VelocityText.text = 'MAIN1VEL x: ' +  Math.round(mainCircle1.body.velocity.x) + ' y: ' + Math.round(mainCircle1.body.velocity.y);
-                main2VelocityText.text = 'MAIN2VEL x: ' +  Math.round(mainCircle2.body.velocity.x) + ' y: ' + Math.round(mainCircle2.body.velocity.y);
+                main1VelocityText.text = 'MAIN1VELOCITY x: ' +  Math.round(mainCircle1.body.velocity.x) + ' y: ' + Math.round(mainCircle1.body.velocity.y);
+                main2VelocityText.text = 'MAIN2VELOCITY x: ' +  Math.round(mainCircle2.body.velocity.x) + ' y: ' + Math.round(mainCircle2.body.velocity.y);
             } else {
                 fpsText.text = '';
                 avgFpsText.text = '';
@@ -225,11 +227,11 @@ angular.module('MyModule')
                 main2VelocityText.text = '';
             }
             
-            if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 1000) || ballCount < 20) {
+            if ((avgFps >= 60 && game.time.fps >= 60 && ballCount < 300) || ballCount < 20) {
                 createCircle();
             }
             
-            if (avgFps <= 55 && game.time.fps <= 55 && ballCount > 100) {
+            if (avgFps <= 45 && game.time.fps <= 45 && ballCount > 100) {
                 destroyCircle();
             }
 
