@@ -38,5 +38,5 @@ angular.module('MyModule').config(function ($routeProvider) {
    });
 
 
-   $routeProvider.otherwise({ redirectTo: "/ballpit" });
+   $routeProvider.otherwise({ redirectTo: "/follow" });
 });
