@@ -18,7 +18,7 @@ angular.module('MyModule').factory('KineticService', function ($window, UtilityS
     };
 
     KineticServiceFactory.text = function (textVal, pos, fontSize, color) {
-        var simpleText = new Kinetic.Text({
+        var simpleText = new $window.Kinetic.Text({
             x: pos.x,
             y: pos.y,
             text: textVal,

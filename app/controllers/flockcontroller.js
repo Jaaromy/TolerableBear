@@ -39,10 +39,10 @@ angular.module('MyModule')
         }
         
         function create() {
-            game.physics.startSystem(Phaser.Physics.P2JS);
+            game.physics.startSystem($window.Phaser.Physics.P2JS);
             agents = game.add.group();
             agents.enableBody = true;
-            agents.physicsBodyType = Phaser.Physics.P2JS;
+            agents.physicsBodyType = $window.Phaser.Physics.P2JS;
             game.time.advancedTiming = true;
             
             agentCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -63,10 +63,10 @@ angular.module('MyModule')
 
         function move(agent) {
             //Swap y position to correctly calculate in Quad I.
-            var tmpp1 = new Vec2(agent.position.x, target.position.y);
-            var tmpp2 = new Vec2(target.position.x, agent.position.y);
+            var tmpp1 = new $window.Vec2(agent.position.x, target.position.y);
+            var tmpp2 = new $window.Vec2(target.position.x, agent.position.y);
     
-            var vecp1p2 = vMath.normalize(vMath.subV(tmpp2, tmpp1));
+            var vecp1p2 = $window.vMath.normalize($window.vMath.subV(tmpp2, tmpp1));
             var angle = Math.atan2(vecp1p2.x, vecp1p2.y);
             
             if (angle < 0) {
