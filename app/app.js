@@ -1,4 +1,3 @@
-/// <reference path="../typings/angularjs/angular.d.ts"/>
 angular.module('MyModule', ['ngRoute']);
 
 angular.module('MyModule').config(function ($routeProvider) {

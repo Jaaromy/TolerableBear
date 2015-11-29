@@ -1,23 +1,30 @@
 {
-  "name" : "TolerableBear",
-  "version" : "0.1.0",
-  "author" : "Jaaromy Zierse",
-  "description": "website containing demonstrations of physics and artificial intelligence",
-  "homepage": "https://github.com/Jaaromy/TolerableBear",
-  "private": true,
-  "repository" : { 
-	"type" : "git", 
-	"url" : "https://github.com/Jaaromy/TolerableBear.git"
+  "name": "TolerableBear",
+  "version": "0.1.4",
+  "description": "Demonstrations of physics and artificial intelligence",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint app && node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaaromy/TolerableBear.git"
   },
   "keywords": [
     "ai",
     "physics",
 	"phaser"
   ],
-  "licence" : "MIT",
-  "scripts" : {
-    "start": "node server"
+  "author": "Jaaromy Zierse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jaaromy/TolerableBear/issues"
   },
+  "homepage": "https://github.com/Jaaromy/TolerableBear#readme",
   "dependencies": {
+  },
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "jshint": "^2.8.0"
   }
 }
