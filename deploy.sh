@@ -1,1 +1,1 @@
-ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd /opt/tolerablebear && git pull && npm install && pm2 restart tolerablebear"
+ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd /opt/tolerablebear && git pull && npm install"
