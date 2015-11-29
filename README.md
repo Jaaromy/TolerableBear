@@ -1,7 +1,8 @@
 # Tolerable Bear
 ## Various demonstrations of physics and artificial intelligence with JavaScript and HTML5
 
-[![Circle CI](https://circleci.com/gh/Jaaromy/TolerableBear.svg?style=svg)](https://circleci.com/gh/Jaaromy/TolerableBear)
+[![Circle CI](https://circleci.com/gh/Jaaromy/TolerableBear.png?style=shield)](https://circleci.com/gh/Jaaromy/TolerableBear)
+[![Shippable](https://img.shields.io/shippable/565a72f31895ca44742480f7.svg)](https://app.shippable.com/projects/565a72f31895ca44742480f7)
 
 ### Libraries
 * [phaser](http://phaser.io/)

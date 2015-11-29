@@ -2,4 +2,4 @@ deployment:
   prod:
     branch: master
     commands:
-      - bash -x deploy.sh
+      - ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd $DEPLOY_DIRECTORY && git pull && npm install"
