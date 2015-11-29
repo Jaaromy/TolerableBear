@@ -1,0 +1,12 @@
+# Language setting
+language: node_js
+
+# Version number
+node_js:
+      - 0.10.40
+env:
+	- secure: AWJgoFmt4MmTLtwk0SgmrQThT75xIOciOcoXJjLZjowEdrRZ1CvdRR3nSbFz9WGyziKBdPKC0uwEEzSIKX9TT9AOvcRHTWaEQ5U1HWZWKricEprdoxndVDeOA6VNm8cxg4T7ckVCLHchXuX6as3RfcPCv+M3NiCYuAT6RFYx2UmwNBgQauntIN5PsMpLTQ5YF5OTziR29edtlzq5PvpazvuW3GCMa+uYjC3uME/NCtFuJMbHRFCUD/TFFlyAy+qWvTFLHuN5Hx99YqZkOgw5bwsIgO8KT79/f11KfodfVAmb0y41nA6SeVgv+7bAqsxxADImaUJD0E+n/RV50X85lg==
+
+# Deploy to remote machine
+after_script:
+      - if [ "$BRANCH" == "develop" ]; then ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd /opt/tolerablebear && git pull && npm install"; fi
