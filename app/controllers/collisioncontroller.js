@@ -31,37 +31,37 @@ angular.module('MyModule')
 
             for (i = 0; i < 8; i++) {
                 radius = 15;
-                startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
-                v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt(-10, 10));
-                v1 = vMath.normalize(v1);
-                v1 = vMath.mulS(v1, UtilityService.randomInt(1, 4));
+                startPos = new $window.Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
+                v1 = new $window.Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt(-10, 10));
+                v1 = $window.vMath.normalize(v1);
+                v1 = $window.vMath.mulS(v1, UtilityService.randomInt(1, 4));
                 AgentService.createAgent(stage, null, startPos, v1, radius);
             }
 
             for (i = 0; i < 8; i++) {
                 radius = 20;
-                startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
-                v1 = new Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt(-10, 10));
-                v1 = vMath.normalize(v1);
-                v1 = vMath.mulS(v1, UtilityService.randomInt(1, 4));
+                startPos = new $window.Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
+                v1 = new $window.Vec2(UtilityService.randomInt( -10, 10), UtilityService.randomInt(-10, 10));
+                v1 = $window.vMath.normalize(v1);
+                v1 = $window.vMath.mulS(v1, UtilityService.randomInt(1, 4));
                 AgentService.createAgent(stage, null, startPos, v1, radius);
             }
 
             for (i = 0; i < 8; i++) {
                 radius = 25;
-                startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
-                v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
-                v1 = vMath.normalize(v1);
-                v1 = vMath.mulS(v1, UtilityService.randomInt(1, 4));
+                startPos = new $window.Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
+                v1 = new $window.Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
+                v1 = $window.vMath.normalize(v1);
+                v1 = $window.vMath.mulS(v1, UtilityService.randomInt(1, 4));
                 AgentService.createAgent(stage, null, startPos, v1, radius);
             }
 
             for (i = 0; i < 3; i++) {
                 radius = 70;
-                startPos = new Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
-                v1 = new Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
-                v1 = vMath.normalize(v1);
-                v1 = vMath.mulS(v1, UtilityService.randomInt(1, 2));
+                startPos = new $window.Vec2(UtilityService.randomInt(radius * 2, stage.getWidth() - radius * 2), UtilityService.randomInt(radius * 2, stage.getHeight() - radius * 2));
+                v1 = new $window.Vec2(UtilityService.randomInt(-10, 10), UtilityService.randomInt(-10, 10));
+                v1 = $window.vMath.normalize(v1);
+                v1 = $window.vMath.mulS(v1, UtilityService.randomInt(1, 2));
                 AgentService.createAgent(stage, null, startPos, v1, 70);
             }
         }
