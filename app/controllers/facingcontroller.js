@@ -23,7 +23,7 @@ angular.module('MyModule')
         var statsText;
         
         function create() {
-            game.physics.startSystem(Phaser.Physics.P2JS);
+            game.physics.startSystem($window.Phaser.Physics.P2JS);
             agent = game.add.sprite(game.world.width / 2, game.world.height / 2, 'agent');
             agent.anchor.setTo(0.5, 1.0);
             agent.width = 40;
@@ -60,7 +60,7 @@ angular.module('MyModule')
         var aSpeed = 100;
         
         function update() {
-            var pi4 = (game.math.PI2 / 4)
+            var pi4 = (game.math.PI2 / 4);
             var angle = game.math.angleBetweenPoints(agent.position, waypoint.position);
             agent.body.rotation = angle + pi4;
             

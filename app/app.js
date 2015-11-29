@@ -1,4 +1,3 @@
-/// <reference path="../typings/angularjs/angular.d.ts"/>
 angular.module('MyModule', ['ngRoute']);
 
 angular.module('MyModule').config(function ($routeProvider) {
@@ -7,15 +6,15 @@ angular.module('MyModule').config(function ($routeProvider) {
       templateUrl: "app/views/main.html"
    });
 
-   $routeProvider.when("/collisions", {
-      controller: "collisioncontroller",
-      templateUrl: "app/views/shapes.html"
-   });
-
-   $routeProvider.when("/velocity", {
-       controller: "velocitycontroller",
-       templateUrl: "app/views/shapes.html"
-   });
+//   $routeProvider.when("/collisions", {
+//      controller: "collisioncontroller",
+//      templateUrl: "app/views/shapes.html"
+//   });
+//
+//   $routeProvider.when("/velocity", {
+//       controller: "velocitycontroller",
+//       templateUrl: "app/views/shapes.html"
+//   });
 
    $routeProvider.when("/ballpit", {
        controller: "ballpitcontroller",

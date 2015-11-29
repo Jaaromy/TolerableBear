@@ -1,6 +1,7 @@
 angular.module('MyModule')
     .controller('ballpitcontroller', function ($scope, $window, $timeout, UtilityService) {
         'use strict';
+        var self = this;
         $scope.windowWidth = function () {
             return $window.innerWidth;
         };
@@ -155,7 +156,7 @@ angular.module('MyModule')
             circle.height = circle.width;
             circle.body.setCircle(radius,0,0,0);
 
-            circle.body.onBeginContact.add(circleContact, this);
+            circle.body.onBeginContact.add(circleContact, self);
 
             circle.body.setCollisionGroup(circleCollisionGroup);
             circle.body.collides(circleCollisionGroup);

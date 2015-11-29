@@ -31,10 +31,10 @@ angular.module('MyModule')
 
             while (diam * count < stage.getHeight() - diam) {
                 count++;
-                v1 = new Vec2(1, 0);
-                v1 = vMath.normalize(v1);
-                v1 = vMath.mulS(v1, count * 2);
-                AgentService.createAgent(stage, null, new Vec2(radius, diam * count), v1, radius);
+                v1 = new $window.Vec2(1, 0);
+                v1 = $window.vMath.normalize(v1);
+                v1 = $window.vMath.mulS(v1, count * 2);
+                AgentService.createAgent(stage, null, new $window.Vec2(radius, diam * count), v1, radius);
             }
         }
 
