@@ -2,4 +2,5 @@ deployment:
   prod:
     branch: master
     commands:
-      - ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd $DEPLOY_DIRECTORY && git pull && npm install"
+		- echo "Shippable.com is deploying"
+#      - ssh $REMOTE_USERNAME@$REMOTE_MACHINE "cd $DEPLOY_DIRECTORY && git pull && npm install"
