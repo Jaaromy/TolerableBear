@@ -9,6 +9,6 @@ phases:
   build:
     commands:
       - echo "******** Uploading to S3 ********"
-      - aws s3 sync . s3://tolerablebear.net --delete --exclude "*" --include "assets/*" --include "*.js" --include "*.css" --include "index.html" --exclude "test*"
+      - aws s3 sync . s3://tolerablebear.net --delete --exclude "*" --include "assets/*" --include "*.js" --include "*.css" --include "*.html" --exclude "test*"
       - aws configure set preview.cloudfront true
       - aws cloudfront create-invalidation --distribution-id EUTXATDDJG2N2 --paths /css* /assets* /libs* /app* /index.html
