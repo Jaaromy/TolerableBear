@@ -1,5 +1,0 @@
-{
-	"browser": true,
-    "predef": ["angular"],
-    "node": true
-}
