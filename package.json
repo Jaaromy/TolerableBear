@@ -1,6 +1,6 @@
 {
-  "name": "TolerableBear",
-  "version": "0.1.4",
+  "name": "tolerablebear",
+  "version": "0.1.5",
   "description": "Demonstrations of physics and artificial intelligence",
   "main": "app/app.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "keywords": [
     "ai",
     "physics",
-	"phaser"
+    "phaser"
   ],
   "author": "Jaaromy Zierse",
   "license": "MIT",
@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/Jaaromy/TolerableBear#readme",
   "dependencies": {
+    "kinetic": "5.2.0",
+    "moment": "2.20.1",
+    "phaser-ce": "2.10.1"
   },
   "devDependencies": {
     "assert": "^1.3.0",
