@@ -1,6 +1,6 @@
 {
   "name": "tolerablebear",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Demonstrations of physics and artificial intelligence",
   "main": "app/app.js",
   "scripts": {
