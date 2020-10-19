@@ -12,4 +12,3 @@
 - [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
 - [node.js](http://nodejs.org/)
 - [Moment.js](http://momentjs.com/)
-- [Tudor Nita's Vector Math Library](http://www.cgrats.com/javascript-2d-vector-library.html)
