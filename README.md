@@ -1,6 +1,6 @@
 # Tolerable Bear
 
-![Build Status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiSUxSWDRiZ29UWW82WnFwdzJzTGh2ais0QWswSU1Vc3VHK2grVEJ0RXVlaFd6VE4zclhQOXlQV2pabFo3eDFnS2grbEV2TGpBN3hjUFZlY3RqRk56cDlBPSIsIml2UGFyYW1ldGVyU3BlYyI6IlVKdWkyOThJdG9Sd1kxUUoiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+![CI](https://github.com/Jaaromy/TolerableBear/workflows/CI/badge.svg?branch=master)
 
 ## Various demonstrations of physics and artificial intelligence with JavaScript and HTML5
 
