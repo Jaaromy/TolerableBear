@@ -23,7 +23,7 @@
   "homepage": "https://github.com/Jaaromy/TolerableBear#readme",
   "dependencies": {
     "kinetic": "5.2.0",
-    "moment": "2.20.1",
+    "moment": "2.29.4",
     "phaser-ce": "2.10.1"
   },
   "devDependencies": {
